@@ -206,7 +206,7 @@ void task(Tree* node) {//функция преобразования
         }
     }
 }
-
+ 
 
 
 void treeToExpresion(Tree* tree) { //обратный алгоритм дейкстры
