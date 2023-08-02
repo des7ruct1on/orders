@@ -32,8 +32,8 @@ Makefile
 >- `make clean` - удаляет все исполняемые файлы, то есть *.out
 >- `make cmp` - компилирует указанный файл
 >- `make debug` - дебаг
-> CC = gcc - компилятор
-> CFLAGS = -std=c99 -Wall -Werror - флаги
-> DEBUG = gdb - компилятор gdb
-> FILEOUT = queue.out -исполняемый файл
+> CC = gcc - компилятор \
+> CFLAGS = -std=c99 -Wall -Werror - флаги \
+> DEBUG = gdb - компилятор gdb \
+> FILEOUT = queue.out -исполняемый файл \
 > SOURCES = queue.c main.c -файл основной программы(main.c) и файла библиотеки очереди(queue.c)
