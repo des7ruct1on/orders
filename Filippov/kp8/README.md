@@ -14,5 +14,5 @@ Makefile (запуск программы)
 > CC = gcc - компилятор \
 > CFLAGS = -std=c99 -Wall -Werror - флаги \
 > DEBUG = gdb - компилятор gdb \
-> FILEOUT = queue.out -исполняемый файл \
-> SOURCES = queue.c main.c -файл основной программы(main.c) и файла библиотеки очереди(queue.c)
+> FILEOUT = list.out -исполняемый файл \
+> SOURCES = list.c main.c -файл основной программы(main.c) и файла библиотеки списка(list.c)
