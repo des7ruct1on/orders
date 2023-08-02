@@ -35,44 +35,34 @@ void update_file(const char* filename, vector* table) {
     fclose(file);
 }
 
-void quick_sort(vector* table) {
-    int index_left = 0;
-    int index_right = 0;
-    vector* v1 = malloc(sizeof(vector));
-    vector* v2 = malloc(sizeof(vector));
-    create_vector(v1, 0);
-    create_vector(v2, 0);
+// Function to partition the array for quick sort
+int partition(vector* v, int low, int high) {
+    data pivot = get_vector(v, high);
+    int i = low - 1;
 
-    data value;
-
-    if (!empty_vector(table)) {
-        value = table->data[0];
-        int size = size_vector(table);
-        for (int i = 0; i < size; i++) {
-            if (strcmp(table->data[i].key, value.key) < 0) {
-                add_vector(v1, index_left, table->data[i]);
-                resize_vector(v1, size_vector(v1) + 1);
-                index_left++;
-            } else {
-                add_vector(v2, index_right, table->data[i]);
-                resize_vector(v2, size_vector(v2) + 1);
-                index_right++;
-            }
+    for (int j = low; j <= high - 1; j++) {
+        if (cmp_key(get_vector(v, j), pivot) < 0) {
+            i++;
+            swap(&v->data[i], &v->data[j]);
         }
-        quick_sort(v1);
-        quick_sort(v2);
-        resize_vector(v1, size_vector(v1) + 1);
-        add_vector(v1, index_left + 1, value);
-        for (int i = 0; i < size_vector(v2); i++) {
-            add_vector(v1, index_left++, get_vector(v2, index_right));
-            resize_vector(v1, size_vector(v1) + 1);
-        }
-
     }
-    destroy_vector(v1);
-    destroy_vector(v2);
+    swap(&v->data[i + 1], &v->data[high]);
+    return i + 1;
+}
 
+// Quick sort function using recursion
+void quick_sort_helper(vector* v, int low, int high) {
+    if (low < high) {
+        int pi = partition(v, low, high);
+        quick_sort_helper(v, low, pi - 1);
+        quick_sort_helper(v, pi + 1, high);
+    }
+}
 
+// Main quick sort function
+void quick_sort(vector* table) {
+    int size = size_vector(table);
+    quick_sort_helper(table, 0, size - 1);
 }
 
 int main(int argc, char const* argv[]) {
