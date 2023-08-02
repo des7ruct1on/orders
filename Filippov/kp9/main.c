@@ -35,7 +35,7 @@ void update_file(const char* filename, vector* table) {
     fclose(file);
 }
 
-// Function to partition the array for quick sort
+// функция соединения
 int partition(vector* v, int low, int high) {
     data pivot = get_vector(v, high);
     int i = low - 1;
@@ -50,7 +50,7 @@ int partition(vector* v, int low, int high) {
     return i + 1;
 }
 
-// Quick sort function using recursion
+// Вспомогательная функция сортировки
 void quick_sort_helper(vector* v, int low, int high) {
     if (low < high) {
         int pi = partition(v, low, high);
@@ -59,7 +59,7 @@ void quick_sort_helper(vector* v, int low, int high) {
     }
 }
 
-// Main quick sort function
+// Основная функция быстрой сортировки
 void quick_sort(vector* table) {
     int size = size_vector(table);
     quick_sort_helper(table, 0, size - 1);

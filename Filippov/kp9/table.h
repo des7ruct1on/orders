@@ -30,7 +30,7 @@ void destroy_vector(vector* v);
 int cmp_key(data x, data y);
 void print_table(vector* v);
 void swap(data* x, data* y);
-data binary_search(vector* table, char* key, bool reverseSorted);
+data binary_search(vector* table, char* key, bool reverse_sorted);
 bool check_table_sorted(vector* table);
 bool check_table_reversed(vector* table);
 #endif
