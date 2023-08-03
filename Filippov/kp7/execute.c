@@ -201,7 +201,8 @@ int main(int argc, const char *argv[]) {
             scanned = false;
             is_null_row = true;
         }
-    }
+    } 
+    
     //printf("<%d>\n", k);
     fseek(file, 0, SEEK_SET);
     col = 1;
