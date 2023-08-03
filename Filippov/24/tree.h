@@ -16,7 +16,8 @@ typedef enum {
     OP_MULTIPLY = '*',
     OP_DIVIDE = '/',
     OP_UNARY_MINUS ='!',
-    OP_POW = '^'
+    OP_POW = '^',
+    OP_MISTAKE = ';'
 } Operator;
 
 // данные символа
@@ -120,6 +121,7 @@ int sizeList(node* head);
 bool isOperator(char ch);
 int getPriority(char ch);
 char oppToChar(Operator op);
+Operator charToOp(char c);
 OperatorAssociation opAssociation(char op);
 
 #endif

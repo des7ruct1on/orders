@@ -19,8 +19,29 @@ char oppToChar(Operator op) {
             return op;
         case OP_UNARY_MINUS:
             return '-';
+        case OP_MISTAKE:
+            return ';';
     }
     return -1;
+}
+
+Operator charToOp(char c) {
+    if (c == '*') {
+        return OP_MULTIPLY;
+    } else if (c == '/') {
+        return OP_DIVIDE;
+    } else if (c == '+') {
+        return OP_PLUS;
+    } else if (c == '-') {
+        return OP_MINUS;
+    } else if (c == '^') {
+        return OP_POW;
+    } else if (c == '!') {
+        return OP_UNARY_MINUS;
+    } else {
+        return OP_MISTAKE;
+    }
+
 }
 
 void printTree(Tree* tree, int lvl){

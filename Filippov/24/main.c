@@ -16,19 +16,16 @@ void nextToken(Symbol* symbol, char input[]) {
         return;
     }
 
-    if (isdigit(c)) {
+    if (isdigit(c) || c == '.') {
         symbol->type = symb_NUMBER;
-        symbol->data.number = c - '0';
-        index++;  // двигаемся дальше по выражению
-
-        // Считываем все цифры числа
-        while (isdigit(input[index])) {
-            symbol->data.number = symbol->data.number * 10 + (input[index] - '0');
-            index++;
+        sscanf(&input[index], "%f", &symbol->data.number); // считываем float число
+        while (isdigit(input[index]) || input[index] == '.') {
+            index++;  // двигаемся дальше по выражению
         }
     } else if (isOperator(c)) {
+        Operator tmp = charToOp(c);
         symbol->type = symb_OP;
-        symbol->data.op = c;
+        symbol->data.op = tmp;
         index++;  // двигаемся дальше по выражению
     } else if (isalpha(c)) {
         symbol->type = symb_VAR;
@@ -72,6 +69,7 @@ void deikstraAlgorithm(char exp[], node** expression) {
                 return;
 
             case symb_OP://если оператор
+            
                 while(true) {
                     if (stackEmpty(s)) {//если пусто
                         break;
@@ -95,6 +93,8 @@ void deikstraAlgorithm(char exp[], node** expression) {
                 break;
 
             case symb_NUMBER:
+                pushBack(expression, t);//пушим в выходную строку
+                break;
             case symb_VAR:
                 pushBack(expression, t);//пушим в выходную строку
                 break;
@@ -175,6 +175,59 @@ Tree* treeCopy(Tree* t) { //функция копирования дерева
     return tmp;
 }
 
+// Custom comparison function for SymbolData of type symb_NUMBER
+bool areSymbolDataNumbersEqual(SymbolData data1, SymbolData data2) {
+    return data1.number == data2.number;
+}
+
+// Custom comparison function for SymbolData of type symb_VAR
+bool areSymbolDataVarsEqual(SymbolData data1, SymbolData data2) {
+    return data1.c == data2.c;
+}
+
+// Custom comparison function for SymbolData of type symb_OP
+bool areSymbolDataOperatorsEqual(SymbolData data1, SymbolData data2) {
+    return data1.op == data2.op;
+}
+
+bool areTreesEqual(Tree* tree1, Tree* tree2) {
+    if (tree1 == NULL && tree2 == NULL) {
+        // оба пустые
+        return true;
+    }
+
+    if (tree1 == NULL || tree2 == NULL) {
+        // одно пустое, другое нет
+        return false;
+    }
+
+    // Проверяем каждый символ
+    if (tree1->value.type == symb_NUMBER ) {
+        if (tree2->value.type != tree1->value.type || !areSymbolDataNumbersEqual(tree1->value.data, tree2->value.data)) {
+            return false;
+        }
+    } else if (tree1->value.type == symb_VAR) {
+        if (tree2->value.type != tree1->value.type || !areSymbolDataVarsEqual(tree1->value.data, tree2->value.data)) {
+            return false;
+        }
+    } else if (tree1->value.type == symb_OP) {
+        if (tree2->value.type != tree1->value.type || !areSymbolDataOperatorsEqual(tree1->value.data, tree2->value.data)) {
+            return false;
+        }
+    } else {
+        // неизвестный тип
+        return false;
+    }
+
+    // рекурсия для других под-деревьев
+    bool leftEqual = areTreesEqual(tree1->left, tree2->left);
+    bool rightEqual = areTreesEqual(tree1->right, tree2->right);
+
+    // если равны, то выводим равенство
+    return leftEqual && rightEqual;
+}
+
+
 void task(Tree* node) {//функция преобразования
     if (node == NULL) {
         return;
@@ -191,6 +244,7 @@ void task(Tree* node) {//функция преобразования
                 leftTree->left->value.type = symb_NUMBER;
                 leftTree->left->value.data.number = 1;
 
+                // переключаем ветки дерева
                 node->right = leftTree;
                 node->left = rightTree;
             }
@@ -201,8 +255,20 @@ void task(Tree* node) {//функция преобразования
                 rightTree->left->value.type = symb_NUMBER;
                 rightTree->left->value.data.number = 1;
             }
-        } else {
-            return;
+        } else if (leftTree->value.data.op == OP_POW && rightTree->value.data.op == OP_POW) {
+            if (!areTreesEqual(leftTree->left, rightTree->left)) { // проверяем, одинаковые ли под-деревья у нас
+                return;
+            } else {
+                node->value.data.op = OP_POW;
+                rightTree->value.data.op = OP_PLUS;
+                Tree* tmp =  treeCopy(leftTree->right);
+                Tree* val = treeCopy(rightTree->left);
+                clearTree(rightTree->left);
+                clearTree(leftTree);
+                node->left = val;
+                rightTree->left = tmp;
+
+            }
         }
     }
 }
