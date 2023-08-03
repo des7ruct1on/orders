@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall -Werror
 DEBUG = gdb
-FILEOUT = main.out
-SOURCES = main.c
+FILEOUT = list.out
+SOURCES = list.c main.c
 
 all:
 	$(CC) $(CFLAGS) $(SOURCES)  -o $(FILEOUT)
