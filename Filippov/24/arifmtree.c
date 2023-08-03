@@ -1,15 +1,15 @@
-#include "tree.h"
+#include "arifmtree.h"
 
-Tree* createTree(Symbol value) {
-    Tree* newTree = (Tree*)malloc(sizeof(Tree));
-    newTree->value = value;
-    newTree->parent = NULL;
-    newTree->left = NULL;
-    newTree->right = NULL;
-    return newTree;
+Tree* create_tree(Symbol value) {
+    Tree* new_tree = (Tree*)malloc(sizeof(Tree));
+    new_tree->value = value;
+    new_tree->parent = NULL;
+    new_tree->left = NULL;
+    new_tree->right = NULL;
+    return new_tree;
 }
 
-char oppToChar(Operator op) {
+char opp_to_char(Operator op) {
     switch(op) {
         case OP_MINUS:
         case OP_PLUS:
@@ -25,7 +25,7 @@ char oppToChar(Operator op) {
     return -1;
 }
 
-Operator charToOp(char c) {
+Operator char_to_op(char c) {
     if (c == '*') {
         return OP_MULTIPLY;
     } else if (c == '/') {
@@ -44,9 +44,9 @@ Operator charToOp(char c) {
 
 }
 
-void printTree(Tree* tree, int lvl){
+void print_tree(Tree* tree, int lvl){
     if(tree->value.type == symb_OP) {
-        printTree(tree->right, lvl + 1);
+        print_tree(tree->right, lvl + 1);
     }
     for (int i = 0; i < lvl; i++) {
         printf("\t");
@@ -58,7 +58,7 @@ void printTree(Tree* tree, int lvl){
         case symb_VAR:
             if(tree->value.data.op == '-'){
                 printf("-\n");
-                printTree(tree->right, lvl + 1);
+                print_tree(tree->right, lvl + 1);
             } else {
                 printf("%c\n", tree->value.data.c);
             }
@@ -66,9 +66,9 @@ void printTree(Tree* tree, int lvl){
         case symb_OP:
             if(tree->value.data.op == OP_UNARY_MINUS) {
                 printf("-\n");
-                printTree(tree->right, lvl + 1);
+                print_tree(tree->right, lvl + 1);
             } else {
-                printf("%c\n", oppToChar(tree->value.data.op));
+                printf("%c\n", opp_to_char(tree->value.data.op));
             }
             break;
         default:
@@ -76,139 +76,139 @@ void printTree(Tree* tree, int lvl){
             return;
     }
     if (tree->value.type == symb_OP) {
-        printTree(tree->left, lvl + 1);
+        print_tree(tree->left, lvl + 1);
     }
 }
 
-Tree* newNode(Tree* t, Symbol value) {
+Tree* add_node(Tree* t, Symbol value) {
     if (t == NULL) {
-        return createTree(value);
+        return create_tree(value);
     } 
     if (value.data.c < t->value.data.c) {
-        t->left = newNode(t->left, value);
+        t->left = add_node(t->left, value);
     } else if (value.data.c > t->value.data.c) {
-        t->right = newNode(t->right, value);
+        t->right = add_node(t->right, value);
     }
     return t;
 }
 
-void clearTree(Tree* tree) {
+void clear_tree(Tree* tree) {
     if (tree == NULL) {
         return;
     }
-    clearTree(tree->left);
-    clearTree(tree->right);
+    clear_tree(tree->left);
+    clear_tree(tree->right);
     free(tree);
 }
 
 
-void initStack(stack* s) {
+void init_stack(stack* s) {
     s->top = NULL;
     s->size = 0;
 }
 
-bool stackEmpty(stack* s) {
+bool stack_empty(stack* s) {
     return s->size == 0;
 }
 
-int stackSize(stack* s) {
+int stack_size(stack* s) {
     return s->size;
 }
 
-void stackPushTree(stack* s, Tree* value) {
-    stackNode* tmp = malloc(sizeof(stackNode));
+void stack_push_tree(stack* s, Tree* value) {
+    stack_node* tmp = malloc(sizeof(stack_node));
     tmp->type = TREE;
-    tmp->value.treeValue = value;
+    tmp->value.tree_value = value;
     tmp->prev = s->top;
     s->top = tmp;
     s->size++;
 }
 
-void stackPushSymbol(stack* s, Symbol value) {
-    stackNode* tmp = malloc(sizeof(stackNode));
+void stack_push_symbol(stack* s, Symbol value) {
+    stack_node* tmp = malloc(sizeof(stack_node));
     tmp->type = SYMBOL;
-    tmp->value.symbolValue = value;
+    tmp->value.symbol_value = value;
     tmp->prev = s->top;
     s->top = tmp;
     s->size++;
 }
 
-Tree* stackPopTree(stack* s) {
-    if (stackSize(s) == 0) {
+Tree* stack_pop_tree(stack* s) {
+    if (stack_size(s) == 0) {
         printf("Стек пуст!\n");
         return NULL;
     }
-    stackNode* tmp = s->top;
-    Tree* result = tmp->value.treeValue;
+    stack_node* tmp = s->top;
+    Tree* result = tmp->value.tree_value;
     s->top = s->top->prev;
     free(tmp);
     s->size--;
     return result;
 }
 
-Symbol stackPopSymbol(stack* s) {
-    if (stackSize(s) == 0) {
+Symbol stack_pop_symbol(stack* s) {
+    if (stack_size(s) == 0) {
         printf("Стек пуст!\n");
-        Symbol emptySymbol;
-        emptySymbol.type = symb_NONE;
-        emptySymbol.data.c = '\0';
-        return emptySymbol;
+        Symbol empty;
+        empty.type = symb_NONE;
+        empty.data.c = '\0';
+        return empty;
     }
-    stackNode* tmp = s->top;
-    Symbol result = tmp->value.symbolValue;
+    stack_node* tmp = s->top;
+    Symbol result = tmp->value.symbol_value;
     s->top = s->top->prev;
     free(tmp);
     s->size--;
     return result;
 }
 
-void stackDestroy(stack* s) {
-    while (!stackEmpty(s)) {
-        stackNode* current = s->top;
+void stack_destroy(stack* s) {
+    while (!stack_empty(s)) {
+        stack_node* current = s->top;
         s->top = s->top->prev;
         free(current);
     }
     free(s);
 }
 
-Tree* stackTopTree(stack* s) {
-    if (stackSize(s) == 0) {
+Tree* stack_top_tree(stack* s) {
+    if (stack_size(s) == 0) {
         printf("Стек пуст!\n");
         return NULL;
     }
-    return s->top->value.treeValue;
+    return s->top->value.tree_value;
 }
 
-Symbol stackTopSymbol(stack* s) {
-    if (stackSize(s) == 0) {
+Symbol stack_top_symbol(stack* s) {
+    if (stack_size(s) == 0) {
         printf("Стек пуст!\n");
-        Symbol emptySymbol;
-        emptySymbol.type = symb_NONE;
-        emptySymbol.data.c = '\0';
-        return emptySymbol;
+        Symbol empty;
+        empty.type = symb_NONE;
+        empty.data.c = '\0';
+        return empty;
     }
-    return s->top->value.symbolValue;
+    return s->top->value.symbol_value;
 }
 
-void pushFront(node** head, Symbol data) {
-    node* newNode = (node*)malloc(sizeof(node));
-    newNode->data = data;
-    newNode->next = *head;
-    newNode->prev = NULL;
+void push_front(node** head, Symbol data) {
+    node* new_node = (node*)malloc(sizeof(node));
+    new_node->data = data;
+    new_node->next = *head;
+    new_node->prev = NULL;
     if (*head != NULL) {
-        (*head)->prev = newNode;
+        (*head)->prev = new_node;
     }
-    *head = newNode;
+    *head = new_node;
 }
 
-void pushBack(node** head, Symbol data) {
-    node* newNode = (node*)malloc(sizeof(node));
-    newNode->data = data;
-    newNode->next = NULL;
+void push_back(node** head, Symbol data) {
+    node* new_node = (node*)malloc(sizeof(node));
+    new_node->data = data;
+    new_node->next = NULL;
 
     if (*head == NULL) {
-        newNode->prev = NULL;
-        *head = newNode;
+        new_node->prev = NULL;
+        *head = new_node;
         return;
     }
 
@@ -217,11 +217,11 @@ void pushBack(node** head, Symbol data) {
         current = current->next;
     }
 
-    current->next = newNode;
-    newNode->prev = current;
+    current->next = new_node;
+    new_node->prev = current;
 }
 
-void deleteBack(node* head) {
+void delete_back(node* head) {
     if (head == NULL) {
         printf("Список пуст!\n");
         return;
@@ -243,7 +243,7 @@ void deleteBack(node* head) {
     free(current);
 }
 
-void deleteFront(node* head) {
+void delete_front(node* head) {
     if (head == NULL) {
         printf("Список пуст!\n");
         return;
@@ -259,7 +259,7 @@ void deleteFront(node* head) {
     free(temp);
 }
 
-void printList(node* head) {
+void print_list(node* head) {
     node* current = head;
     while (current != NULL) {
         printf("%c ", current->data.data.c); // Выводим символ из Symbol
@@ -268,7 +268,7 @@ void printList(node* head) {
     printf("\n");
 }
 
-void destroyList(node* head) { // функция очистки списка
+void destroy_list(node* head) { // функция очистки списка
     node* current = head;
     while (current != NULL) {
         node* temp = current;
@@ -278,7 +278,7 @@ void destroyList(node* head) { // функция очистки списка
     head = NULL;
 }
 
-int sizeList(node* head) {
+int size_list(node* head) {
     int count = 0;
     node* current = head;
     while (current != NULL) {
@@ -288,11 +288,11 @@ int sizeList(node* head) {
     return count;
 }
 
-bool isOperator(char ch) {
+bool is_operator(char ch) {
     return (ch == '+' || ch == '*' || ch == '/' || ch == '^');
 }
 
-int getPriority(char ch) {
+int get_priority(char ch) {
     if (ch == '*' || ch == '/') {
         return 2;
     } else if (ch == '+' || ch == '-') {
@@ -302,7 +302,7 @@ int getPriority(char ch) {
     }
 }
 
-OperatorAssociation opAssociation(char op) {
+OperatorAssociation op_association(char op) {
     if (op == '+' || op == '-' || op == '*' || op == '/')
         return ASSOC_LEFT;
     else

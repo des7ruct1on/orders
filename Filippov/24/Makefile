@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall -Werror
 DEBUG = gdb
-FILEOUT = tree.out
-SOURCES = tree.c main.c
+FILEOUT = arifmtree.out
+SOURCES = arifmtree.c main.c
 
 all:
 	$(CC) $(CFLAGS) $(SOURCES)  -o $(FILEOUT)

@@ -4,12 +4,12 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
-#include "tree.h"
+#include "arifmtree.h"
 
-void nextToken(Symbol* symbol, char input[]) {
+void next_token(Symbol* symbol, char input[]) {
     static int index = 0;
     char c = input[index];
-    static SymbolType prev = symb_NONE;
+    static symbol_type prev = symb_NONE;
     if (c == '\0') {  // проверка на конец выражения
         symbol->type = symb_NONE;
         prev = symb_NONE;
@@ -22,8 +22,8 @@ void nextToken(Symbol* symbol, char input[]) {
         while (isdigit(input[index]) || input[index] == '.') {
             index++;  // двигаемся дальше по выражению
         }
-    } else if (isOperator(c)) {
-        Operator tmp = charToOp(c);
+    } else if (is_operator(c)) {
+        Operator tmp = char_to_op(c);
         symbol->type = symb_OP;
         symbol->data.op = tmp;
         index++;  // двигаемся дальше по выражению
@@ -54,13 +54,13 @@ void nextToken(Symbol* symbol, char input[]) {
     prev = symbol->type;
 }
 
-void deikstraAlgorithm(char exp[], node** expression) {
+void dejikstra_algorithm(char exp[], node** expression) {
     //создаем стек
     stack* s = malloc(sizeof(stack));
-    initStack(s);
+    init_stack(s);
 
     Symbol t;
-    nextToken(&t, exp);//считываем лексему
+    next_token(&t, exp);//считываем лексему
 
     while (t.type != symb_NONE) { // пока лексемы есть
         switch (t.type) {
@@ -71,90 +71,90 @@ void deikstraAlgorithm(char exp[], node** expression) {
             case symb_OP://если оператор
             
                 while(true) {
-                    if (stackEmpty(s)) {//если пусто
+                    if (stack_empty(s)) {//если пусто
                         break;
                     }
 
-                    Symbol top = stackTopSymbol(s);//берем со стека 
+                    Symbol top = stack_top_symbol(s);//берем со стека 
 
                     if (top.type != symb_OP) { //если достали не оператор
                         break;
                     }
                     //если лексема-оператор левоассоциативен и приоритет меньше либо равен оператору сверху или приоритет ниже когда правоассоциативен
-                    if ((opAssociation(t.data.op) == ASSOC_LEFT && getPriority(t.data.op) <= getPriority(top.data.op)) ||
-                        (opAssociation(t.data.op) == ASSOC_RIGHT && getPriority(t.data.op) < getPriority(top.data.op))) {
-                        pushBack(expression, top); //пушим верхуушку стека в выходную строку
-                        stackPopSymbol(s);//берем со стека символ
+                    if ((op_association(t.data.op) == ASSOC_LEFT && get_priority(t.data.op) <= get_priority(top.data.op)) ||
+                        (op_association(t.data.op) == ASSOC_RIGHT && get_priority(t.data.op) < get_priority(top.data.op))) {
+                        push_back(expression, top); //пушим верхуушку стека в выходную строку
+                        stack_pop_symbol(s);//берем со стека символ
                     } else {
                         break;
                     }
                 }
-                stackPushSymbol(s, t);//кладем оператор на стек
+                stack_push_symbol(s, t);//кладем оператор на стек
                 break;
 
             case symb_NUMBER:
-                pushBack(expression, t);//пушим в выходную строку
+                push_back(expression, t);//пушим в выходную строку
                 break;
             case symb_VAR:
-                pushBack(expression, t);//пушим в выходную строку
+                push_back(expression, t);//пушим в выходную строку
                 break;
 
             case symb_LEFT_BR:
-                stackPushSymbol(s, t);//пушим в стек
+                stack_push_symbol(s, t);//пушим в стек
                 break;
 
             case symb_RIGHT_BR:
-                while (!stackEmpty(s) && stackTopSymbol(s).type != symb_LEFT_BR) {//пока не пуст и не дошли до левой скобки
-                    pushBack(expression, stackPopSymbol(s));//выкладываем в выходную строку
+                while (!stack_empty(s) && stack_top_symbol(s).type != symb_LEFT_BR) {//пока не пуст и не дошли до левой скобки
+                    push_back(expression, stack_pop_symbol(s));//выкладываем в выходную строку
                 }
 
-                if (stackEmpty(s)) {//если пустота то потеряли скобку
+                if (stack_empty(s)) {//если пустота то потеряли скобку
                     fprintf(stderr, "Ошибка: пропущена скобка\n");
                     return;
                 }
 
-                stackPopSymbol(s);//вытаскиваем лексему скобки
+                stack_pop_symbol(s);//вытаскиваем лексему скобки
                 break;
         }
 
-        nextToken(&t, exp);//считываем лексему
+        next_token(&t, exp);//считываем лексему
     }
 
-    while (!stackEmpty(s)) {//если лексемы кончились, но стек не пуст
-        if (stackTopSymbol(s).type == symb_LEFT_BR) {//если лежит левая скобка на стеке
+    while (!stack_empty(s)) {//если лексемы кончились, но стек не пуст
+        if (stack_top_symbol(s).type == symb_LEFT_BR) {//если лежит левая скобка на стеке
             fprintf(stderr, "Ошибка: пропущена скобка\n");
             return;
         }
 
-        pushBack(expression, stackPopSymbol(s));//добавляем остатки в строку
+        push_back(expression, stack_pop_symbol(s));//добавляем остатки в строку
     }
 
-    stackDestroy(s);//очищаем стек
+    stack_destroy(s);//очищаем стек
 }
 
-Tree* createAriphmTree(node* queue) {
+Tree* create_tree_arpihm(node* queue) {
     stack* s = malloc(sizeof(stack)); //создаем стек
-    initStack(s);
+    init_stack(s);
     for(node* current = queue; current != NULL; current = current->next) {//проходим по всему списку
         Symbol c = current->data;
         if (c.type != symb_OP) {// если не оператор то создаем узел и добавляем его в стек
-            Tree* tmp = createTree(c);
-            stackPushTree(s, tmp);
+            Tree* tmp = create_tree(c);
+            stack_push_tree(s, tmp);
         } else if (c.type == symb_OP) {//если оператор, то берем два из стека и создаем узел с потомками, затем кладем обратно в стек
-            Tree* right = stackPopTree(s);
-            Tree* left = stackPopTree(s);
-            Tree* op = createTree(c);
+            Tree* right = stack_pop_tree(s);
+            Tree* left = stack_pop_tree(s);
+            Tree* op = create_tree(c);
             op->left = left;
             op->right = right;
-            stackPushTree(s, op);
+            stack_push_tree(s, op);
         }
     }
-    Tree* res = stackPopTree(s);//вытаскиваем дерево-результат
-    stackDestroy(s);
+    Tree* res = stack_pop_tree(s);//вытаскиваем дерево-результат
+    stack_destroy(s);
     return res;
 }
 
-Tree* treeCopy(Tree* t) { //функция копирования дерева
+Tree* tree_cpy(Tree* t) { //функция копирования дерева
     if (t == NULL) {
         return NULL;
     }
@@ -163,34 +163,34 @@ Tree* treeCopy(Tree* t) { //функция копирования дерева
     Symbol s= t->value;
     tmp->value = s;
     if (t->left != NULL) {
-        tmp->left = treeCopy(t->left);
+        tmp->left = tree_cpy(t->left);
     } else {
         tmp->left = NULL;
     }
     if (t->right != NULL) {
-        tmp->right = treeCopy(t->right);
+        tmp->right = tree_cpy(t->right);
     } else {
         tmp->right = NULL;
     }
     return tmp;
 }
 
-// Custom comparison function for SymbolData of type symb_NUMBER
-bool areSymbolDataNumbersEqual(SymbolData data1, SymbolData data2) {
+// функция сравнения чисел
+bool are_symbol_data_numbers_equal(symbol_data data1, symbol_data data2) {
     return data1.number == data2.number;
 }
 
-// Custom comparison function for SymbolData of type symb_VAR
-bool areSymbolDataVarsEqual(SymbolData data1, SymbolData data2) {
+// функция сравнения переменных
+bool are_symbol_data_vars_equal(symbol_data data1, symbol_data data2) {
     return data1.c == data2.c;
 }
 
-// Custom comparison function for SymbolData of type symb_OP
-bool areSymbolDataOperatorsEqual(SymbolData data1, SymbolData data2) {
+// функция сравнения операторов
+bool are_symbol_data_operators_equal(symbol_data data1, symbol_data data2) {
     return data1.op == data2.op;
 }
 
-bool areTreesEqual(Tree* tree1, Tree* tree2) {
+bool are_trees_equal(Tree* tree1, Tree* tree2) {
     if (tree1 == NULL && tree2 == NULL) {
         // оба пустые
         return true;
@@ -203,15 +203,15 @@ bool areTreesEqual(Tree* tree1, Tree* tree2) {
 
     // Проверяем каждый символ
     if (tree1->value.type == symb_NUMBER ) {
-        if (tree2->value.type != tree1->value.type || !areSymbolDataNumbersEqual(tree1->value.data, tree2->value.data)) {
+        if (tree2->value.type != tree1->value.type || !are_symbol_data_numbers_equal(tree1->value.data, tree2->value.data)) {
             return false;
         }
     } else if (tree1->value.type == symb_VAR) {
-        if (tree2->value.type != tree1->value.type || !areSymbolDataVarsEqual(tree1->value.data, tree2->value.data)) {
+        if (tree2->value.type != tree1->value.type || !are_symbol_data_vars_equal(tree1->value.data, tree2->value.data)) {
             return false;
         }
     } else if (tree1->value.type == symb_OP) {
-        if (tree2->value.type != tree1->value.type || !areSymbolDataOperatorsEqual(tree1->value.data, tree2->value.data)) {
+        if (tree2->value.type != tree1->value.type || !are_symbol_data_operators_equal(tree1->value.data, tree2->value.data)) {
             return false;
         }
     } else {
@@ -220,11 +220,11 @@ bool areTreesEqual(Tree* tree1, Tree* tree2) {
     }
 
     // рекурсия для других под-деревьев
-    bool leftEqual = areTreesEqual(tree1->left, tree2->left);
-    bool rightEqual = areTreesEqual(tree1->right, tree2->right);
+    bool left_equal = are_trees_equal(tree1->left, tree2->left);
+    bool right_equal = are_trees_equal(tree1->right, tree2->right);
 
     // если равны, то выводим равенство
-    return leftEqual && rightEqual;
+    return left_equal && right_equal;
 }
 
 
@@ -235,38 +235,38 @@ void task(Tree* node) {//функция преобразования
     task(node->left);
     task(node->right);
     if (node->value.type == symb_OP && node->value.data.op == OP_MULTIPLY) {
-        Tree* leftTree = node->left;
-        Tree* rightTree = node->right;
-        if (leftTree->value.data.op == OP_POW && rightTree->value.data.op != OP_POW) {
-            if (rightTree->value.data.c == leftTree->left->value.data.c || rightTree->value.data.number == leftTree->left->value.data.number) {
+        Tree* left_tree = node->left;
+        Tree* right_tree = node->right;
+        if (left_tree->value.data.op == OP_POW && right_tree->value.data.op != OP_POW) {
+            if (right_tree->value.data.c == left_tree->left->value.data.c || right_tree->value.data.number == left_tree->left->value.data.number) {
                 node->value.data.op = OP_POW;
-                leftTree->value.data.op = OP_PLUS;
-                leftTree->left->value.type = symb_NUMBER;
-                leftTree->left->value.data.number = 1;
+                left_tree->value.data.op = OP_PLUS;
+                left_tree->left->value.type = symb_NUMBER;
+                left_tree->left->value.data.number = 1;
 
                 // переключаем ветки дерева
-                node->right = leftTree;
-                node->left = rightTree;
+                node->right = left_tree;
+                node->left = right_tree;
             }
-        } else if (rightTree->value.data.op == OP_POW && leftTree->value.data.op != OP_POW) {
-            if (leftTree->value.data.c == rightTree->left->value.data.c || leftTree->value.data.number == rightTree->left->value.data.number) {
+        } else if (right_tree->value.data.op == OP_POW && left_tree->value.data.op != OP_POW) {
+            if (left_tree->value.data.c == right_tree->left->value.data.c || left_tree->value.data.number == right_tree->left->value.data.number) {
                 node->value.data.op = OP_POW;
-                rightTree->value.data.op = OP_PLUS;
-                rightTree->left->value.type = symb_NUMBER;
-                rightTree->left->value.data.number = 1;
+                right_tree->value.data.op = OP_PLUS;
+                right_tree->left->value.type = symb_NUMBER;
+                right_tree->left->value.data.number = 1;
             }
-        } else if (leftTree->value.data.op == OP_POW && rightTree->value.data.op == OP_POW) {
-            if (!areTreesEqual(leftTree->left, rightTree->left)) { // проверяем, одинаковые ли под-деревья у нас
+        } else if (left_tree->value.data.op == OP_POW && right_tree->value.data.op == OP_POW) {
+            if (!are_trees_equal(left_tree->left, right_tree->left)) { // проверяем, одинаковые ли под-деревья у нас
                 return;
             } else {
                 node->value.data.op = OP_POW;
-                rightTree->value.data.op = OP_PLUS;
-                Tree* tmp =  treeCopy(leftTree->right);
-                Tree* val = treeCopy(rightTree->left);
-                clearTree(rightTree->left);
-                clearTree(leftTree);
+                right_tree->value.data.op = OP_PLUS;
+                Tree* tmp =  tree_cpy(left_tree->right);
+                Tree* val = tree_cpy(right_tree->left);
+                clear_tree(right_tree->left);
+                clear_tree(left_tree);
                 node->left = val;
-                rightTree->left = tmp;
+                right_tree->left = tmp;
 
             }
         }
@@ -275,7 +275,7 @@ void task(Tree* node) {//функция преобразования
  
 
 
-void treeToExpresion(Tree* tree) { //обратный алгоритм дейкстры
+void tree_to_expresion(Tree* tree) { //обратный алгоритм дейкстры
     switch (tree->value.type) {
         case symb_NUMBER:
             printf("%.2lf", tree->value.data.number);
@@ -286,32 +286,32 @@ void treeToExpresion(Tree* tree) { //обратный алгоритм дейк�
         case symb_OP:
             if (tree->value.data.op == OP_UNARY_MINUS) {
                 printf("-");
-                treeToExpresion(tree->right);
+                tree_to_expresion(tree->right);
             } else {
-                bool addParenthesesLeft = (tree->left->value.type == symb_OP && getPriority(tree->value.data.op) > getPriority(tree->left->value.data.op));
-                bool addParenthesesRight = (tree->right->value.type == symb_OP && getPriority(tree->value.data.op) > getPriority(tree->right->value.data.op));
+                bool add_parent_left = (tree->left->value.type == symb_OP && get_priority(tree->value.data.op) > get_priority(tree->left->value.data.op));
+                bool add_parent_right = (tree->right->value.type == symb_OP && get_priority(tree->value.data.op) > get_priority(tree->right->value.data.op));
 
-                if (tree->value.data.op == OP_DIVIDE && !addParenthesesLeft && !addParenthesesRight) {
+                if (tree->value.data.op == OP_DIVIDE && !add_parent_left && !add_parent_right) {
                     // В случае деления добавляем скобки только для нумератора и знаменателя, если они сами являются операторами
-                    addParenthesesLeft = (tree->left->value.type == symb_OP);
-                    addParenthesesRight = (tree->right->value.type == symb_OP);
+                    add_parent_left = (tree->left->value.type == symb_OP);
+                    add_parent_right = (tree->right->value.type == symb_OP);
                 }
 
-                if (addParenthesesLeft) {
+                if (add_parent_left) {
                     printf("(");
                 }
-                treeToExpresion(tree->left);
-                if (addParenthesesLeft) {
+                tree_to_expresion(tree->left);
+                if (add_parent_left) {
                     printf(")");
                 }
 
-                printf("%c", oppToChar(tree->value.data.op));
+                printf("%c", opp_to_char(tree->value.data.op));
 
-                if (addParenthesesRight) {
+                if (add_parent_right) {
                     printf("(");
                 }
-                treeToExpresion(tree->right);
-                if (addParenthesesRight) {
+                tree_to_expresion(tree->right);
+                if (add_parent_right) {
                     printf(")");
                 }
             }
@@ -334,8 +334,8 @@ int main(int argc, char const* argv[]) {
         printf("Не удалось открыть файл.\n");
         return 1;
     }
-    stack* st = malloc(sizeof(stack));
-    initStack(st);
+    stack* stack = malloc(sizeof(stack));
+    init_stack(stack);
     char exp[MAX_EXPRESSION_LENGTH];
     if (fgets(exp, MAX_EXPRESSION_LENGTH, file) == NULL) {
         printf("Не удалось прочитать данные из файла.\n");
@@ -344,16 +344,16 @@ int main(int argc, char const* argv[]) {
     }
     fclose(file);
     node* expression = NULL;
-    deikstraAlgorithm(exp, &expression);
-    Tree* tree = createAriphmTree(expression);
-    destroyList(expression);
+    dejikstra_algorithm(exp, &expression);
+    Tree* tree = create_tree_arpihm(expression);
+    destroy_list(expression);
     printf("\nИсходное дерево выражений:\n");
-    printTree(tree, 0);
+    print_tree(tree, 0);
     task(tree);
     printf("\nПреобразованное дерево выражений:\n");
-    printTree(tree, 0);
-    treeToExpresion(tree);
-    clearTree(tree);
-    stackDestroy(st);
+    print_tree(tree, 0);
+    tree_to_expresion(tree);
+    clear_tree(tree);
+    stack_destroy(stack);
     return 0;
 }

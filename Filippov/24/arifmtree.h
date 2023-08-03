@@ -1,5 +1,5 @@
-#ifndef tree_h
-#define tree_h
+#ifndef arifmtree_h
+#define arifmtree_h
 
 #include <ctype.h>
 #include <stdio.h> 
@@ -25,7 +25,7 @@ typedef union {
     char c;
     float number;
     Operator op;
-} SymbolData;
+} symbol_data;
 
 // тип символа
 typedef enum {
@@ -35,12 +35,12 @@ typedef enum {
     symb_VAR,
     symb_LEFT_BR,
     symb_RIGHT_BR
-} SymbolType;
+} symbol_type;
 
 // структура символа
 typedef struct {
-    SymbolType type;
-    SymbolData data;
+    symbol_type type;
+    symbol_data data;
 } Symbol;
 
 // структура дерева
@@ -62,14 +62,14 @@ typedef struct node {
 typedef enum { 
     TREE,
     SYMBOL
-} NodeType;
+} node_type;
 
 // струтура узла
 typedef union {
-    char charValue;
-    Tree* treeValue;
-    Symbol symbolValue;
-} NodeValue;
+    char char_value;
+    Tree* tree_value;
+    Symbol symbol_value;
+} node_value;
 
 // структура ассоциативности
 typedef enum {
@@ -78,50 +78,50 @@ typedef enum {
 } OperatorAssociation;
 
 // структура элемента стека на односвязном списке
-typedef struct stackNode {
-    NodeType type;
-    NodeValue value;
-    struct stackNode* prev;
-} stackNode;
+typedef struct stack_node {
+    node_type type;
+    node_value value;
+    struct stack_node* prev;
+} stack_node;
 
 // структура стека
 typedef struct stack {
-    stackNode* top;
+    stack_node* top;
     int size;
 } stack;
 
 //функции дерева
-Tree* createTree(Symbol value);
-Tree* newNode(Tree* t, Symbol value);
-void printTree(Tree* tree, int lvl);
-void clearTree(Tree* tree);
+Tree* create_tree(Symbol value);
+Tree* add_node(Tree* t, Symbol value);
+void print_tree(Tree* tree, int lvl);
+void clear_tree(Tree* tree);
 
 // функции стека
-void initStack(stack* s);
-bool stackEmpty(stack* s);
-int stackSize(stack* s);
-void stackPushTree(stack* s, Tree* value);
-void stackPushSymbol(stack* s, Symbol value);
-Tree* stackPopTree(stack* s);
-Symbol stackPopSymbol(stack* s);
-void stackDestroy(stack* s);
-Tree* stackTopTree(stack* s);
-Symbol stackTopSymbol(stack* s);
+void init_stack(stack* s);
+bool stack_empty(stack* s);
+int stack_size(stack* s);
+void stack_push_tree(stack* s, Tree* value);
+void stack_push_symbol(stack* s, Symbol value);
+Tree* stack_pop_tree(stack* s);
+Symbol stack_pop_symbol(stack* s);
+void stack_destroy(stack* s);
+Tree* stack_top_tree(stack* s);
+Symbol stack_top_symbol(stack* s);
 
 // функции списка (можно было реализовать очередь)
-void pushFront(node** head, Symbol data);
-void pushBack(node** head, Symbol data);
-void deleteBack(node* head);
-void deleteFront(node* head);
-void printList(node* head);
-void destroyList(node* head);
-int sizeList(node* head);
+void push_front(node** head, Symbol data);
+void push_back(node** head, Symbol data);
+void delete_back(node* head);
+void delete_front(node* head);
+void print_list(node* head);
+void destroy_list(node* head);
+int size_list(node* head);
 
 // функции с лексемами
-bool isOperator(char ch);
-int getPriority(char ch);
-char oppToChar(Operator op);
-Operator charToOp(char c);
-OperatorAssociation opAssociation(char op);
+bool is_operator(char ch);
+int get_priority(char ch);
+char opp_to_char(Operator op);
+Operator char_to_op(char c);
+OperatorAssociation op_association(char op);
 
 #endif
