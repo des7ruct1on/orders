@@ -14,4 +14,4 @@ debug:
 cmp:
 	$(CC) $(CFLAGS) $(SOURCES) -o $(FILEOUT)
 run:
-	./$(FILEOUT)
+	./$(FILEOUT) $(FILE)

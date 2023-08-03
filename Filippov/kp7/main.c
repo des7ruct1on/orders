@@ -22,7 +22,6 @@ void solution(element* arr, int* arr_index, int k, int size_col) {
     for(int i = 0; i < size_col; i++) {
         count_col[i] = 0;
     }
-    bool start = false;
     int ind = 0;
     for (int i = 0; i < k; i++) {
         element tmp = arr[i];
@@ -37,10 +36,14 @@ void solution(element* arr, int* arr_index, int k, int size_col) {
     for (int i = 0; i < size_col; i++) {
         if (count_col[i] > max) {
             max = count_col[i];
+            if (several_maxs) {
+                several_maxs = false;
+            }
         } else if (count_col[i] == max) {
             several_maxs = true;
         }
     }
+    //printf("%d max\n", max);
     int col_max = -1; 
     if (several_maxs) {
         bool find = false;
@@ -58,14 +61,14 @@ void solution(element* arr, int* arr_index, int k, int size_col) {
         for (int i = 0; i < size_col; i++) {
             //printf("%d>\t", count_col[i]);
             if (count_col[i] == max) {
-                col_max = count_col[i];
+                col_max = i + 1;
             }
         }
     }
 
-    for (int i = 0; i < size_col; i++) {
+    /*for (int i = 0; i < size_col; i++) {
         printf("ind: %d, count: %d\n", i, count_col[i]);
-    }
+    }*/
     int res = 1;
     for (int i = 0; i < k; i++) {
         element tmp = arr[i];
@@ -202,7 +205,7 @@ int main(int argc, const char *argv[]) {
             is_null_row = true;
         }
     } 
-    
+
     //printf("<%d>\n", k);
     fseek(file, 0, SEEK_SET);
     col = 1;
