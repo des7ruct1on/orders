@@ -1,0 +1,9 @@
+sur I.I 3 320 Moscow 12 34 1 3 
+surqw I.s 2 313 Novgorod 12 44 1 3 
+surwqew I.x 0 0 SPB 14 34 1 3 
+surss I.a 3 2 Yuzhno-Sakhalinsk 12 34 1 3 
+surw I.z 3 5 Izhevsk 15 24 1 3 
+sura I.e 3 12 Oha 19 11 1 3 
+surs I.w 3 25 Perm 20 34 1 3 
+surewqewq I.P 3 45 Paris 23 45 1 3 
+Lyapin I.A 9 100 Moscow 12 22 2 0 
