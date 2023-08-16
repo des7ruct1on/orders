@@ -1,0 +1,26 @@
+Zaitsev Nikita Mac-M2 Apple 8 macos-Monterey 3 SSD Seagate 512 SSD WD 128 HDD HyperX 2048 
+Rodnikova Gelya Mac-M1-Pro Apple 128 macOS-Ventura 3 SSD HyperX 512 SSD Seagate 512 SSD HyperX 1024 
+Rodnikov Egor Ryzen-R9-5900 GTX-TITAN-X 16 Windows-10 3 SSD Kingston 1024 SSD HyperX 512 HDD Crucial 256 
+Dragovich Kirill i5-7400 RTX-4070 32 Windows-11 2 HDD NONAME 256 HDD HyperX 2048 
+Melnikov Ivan Ryzen-R7-3700 RTX-3070 128 Windows-11 3 SSD NONAME 128 SSD Seagate 128 SSD WD 256 
+Dragovich Gelya i3-6100 GTX-TITAN-X 16 Linux 3 SSD WD 1024 SSD Samsung 1024 SSD Crucial 256 
+Hlebnikov Nikita i5-6600k RX-570 128 Windows-10 3 HDD Samsung 256 SSD Kingston 128 HDD Kingston 2048 
+Zaitsev Pavel i3-6100 RTX-3090 128 Windows-10 3 HDD Intel 256 HDD Intel 2048 SSD Kingston 128 
+Melnikova Nastya Ryzen-R3-1200 RX-570 16 Windows-10 3 SSD Toshiba 2048 SSD Kingston 512 SSD Kingston 256 
+Hlebnikov Vlad i5-7400 RX-6900 64 Windows-10 3 SSD Intel 128 SSD Toshiba 2048 HDD Toshiba 256 
+Bitykov Maxim Ryzen-R3-1200 RX-6750 32 Windows-11 3 SSD Seagate 128 SSD HyperX 2048 SSD Samsung 512 
+Potenko Maxim i3-6100 RX-570 16 Windows-11 3 SSD Crucial 2048 SSD Toshiba 256 HDD WD 128 
+Sergeev Dmitriy i5-6600k RX-6750 128 Linux 3 HDD HyperX 1024 SSD Seagate 2048 SSD Samsung 128 
+Azanova Gelya R9-7950x RTX-4070 128 Linux 3 HDD HyperX 512 HDD NONAME 128 HDD Samsung 512 
+Rudenko Vera i9-11900 RTX-3050 32 Windows-11 3 SSD Seagate 128 HDD Intel 2048 HDD Kingston 256 
+Kazakov Vlad Ryzen-R9-5900 RX-7900 128 Linux 3 SSD WD 1024 SSD Kingston 2048 HDD Toshiba 256 
+Bitykov Nikita i9-11900 RTX-4080 16 Windows-11 3 SSD NONAME 128 HDD Seagate 256 HDD HyperX 512 
+Dragovich Vera Ryzen-R5-4500 RX-6900 16 Linux 3 HDD HyperX 512 SSD Toshiba 1024 SSD HyperX 2048 
+Filippov Dmitriy Mac-M2 Apple 16 macOS-Ventura 3 HDD Intel 1024 SSD Samsung 128 SSD Kingston 128 
+Zaitseva Vera Mac-M1 Apple 8 macos-Monterey 3 SSD Samsung 2048 SSD Toshiba 2048 SSD Seagate 512 
+Dragovich Valera i5-7400 RTX-4070 64 Windows-10 3 HDD NONAME 256 HDD HyperX 2048 SSD HyperX 1024 
+Kravchenko Lotta R9-7950x RTX-3070 64 Windows-10 3 SSD Intel 512 SSD NONAME 1024 SSD Toshiba 128 
+Dragovich Vasya i3-6100 RTX-3070 32 Windows-10 3 HDD Kingston 128 SSD WD 128 SSD Kingston 2048 
+Kravchenko Nikita i5-7400 GTX-TITAN-X 64 Windows-11 3 HDD Samsung 512 HDD HyperX 2048 SSD Intel 1024 
+Bitykova Sasha i9-11900 RTX-3070 64 Linux 3 SSD Crucial 2048 HDD Intel 1024 SSD Kingston 512 
+Bortakovksiy Ivan Ryzen-R5-4500 RX-6900 8 Windows-10 3 HDD NONAME 256 SSD WD 256 SSD Seagate 1024 
