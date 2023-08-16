@@ -1,4 +1,4 @@
-#include "pcspecs.h"
+#include "pc.h"
 #include <string.h>
 void init_hash_table(hash_table* table) {
     for (int i = 0; i < TABLE_SIZE; i++) {
@@ -140,7 +140,7 @@ int get_amount_disks(person* p) {
 }
 
 
-driver* get_driver(person* p) {
+solid_driver* get_driver(person* p) {
     if (p == NULL) 
         return NULL;
     return p->disks;
@@ -154,7 +154,7 @@ void print_person(person* p) {
     int ram = get_ram(p);
     char* os = get_os(p);
     int num_drivers = get_amount_disks(p);
-    driver* disks = get_driver(p);
+    solid_driver* disks = get_driver(p);
     printf("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n");
     printf("| Имя: %s %s\n", surname, name);
     printf("| Характеристики компьютера\n");
@@ -173,7 +173,7 @@ void print_person(person* p) {
 
 void print_table(hash_table* table) {
     printf("|           Имя            |    Процессор    |    Видеокарта    |  ОЗУ  | Операционная система |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|----------------------------------------------------------------------------------------------|\n");
     for (int i = 0; i < TABLE_SIZE; i++) {
         if (table->elements[i].data != NULL) {
             person* tmp = table->elements[i].data;
@@ -187,7 +187,7 @@ void print_table(hash_table* table) {
 
         }
     }
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|----------------------------------------------------------------------------------------------|\n");
 }
 
 
@@ -198,9 +198,9 @@ void read_str(person* p, char* str) {
 
     // Выделяем память для массива disks
     int count = p->num_drivers;
-    p->disks = malloc(count * sizeof(driver));
+    p->disks = malloc(count * sizeof(solid_driver));
     for (int i = 0; i < count; i++) {
-        driver tmp;
+        solid_driver tmp;
         sscanf(str, "%s %s %d%n", tmp.type, tmp.name, &(tmp.amount), &offset);
         p->disks[i] = tmp;
         str += offset;
@@ -216,7 +216,7 @@ void write_person_txt(person* p, FILE* file) {
     fprintf(file, "%d ", p->ram);
     fprintf(file, "%s ", p->os);
     fprintf(file, "%d ", p->num_drivers);
-    driver* drivers = get_driver(p);
+    solid_driver* drivers = get_driver(p);
     for (int i = 0; i < p->num_drivers; i++) {
         fprintf(file, "%s ", drivers[i].type);
         fprintf(file, "%s ", drivers[i].name);
@@ -227,7 +227,6 @@ void write_person_txt(person* p, FILE* file) {
 
 void write_str_bin(const char* str, FILE* out) {
     int length = strlen(str);
-    //printf("%s %d\n", str, length);
     if (length > STR_SIZE - 1) {
         length = STR_SIZE - 1;  // Ограничиваем длину строки
     }
@@ -243,7 +242,6 @@ int read_str_bin(char* str, FILE* in) {
         *str = '\0';  // В случае ошибки чтения, устанавливаем пустую строку
         return 0;     // Возвращаем 0, чтобы указать на ошибку чтения
     }
-    //printf("%d\n", length);
     if (length > MAX_SIZE - 1) {
         length = MAX_SIZE - 1;  // Ограничиваем длину строки
     }
@@ -262,7 +260,6 @@ int read_str_bin(char* str, FILE* in) {
 
 void write_person_bin(person* p, FILE* out) {
     // Записываем поля фиксированного размера
-    
     write_str_bin(p->surname, out);
     write_str_bin(p->name, out);
     write_str_bin(p->cpu, out);
@@ -272,7 +269,7 @@ void write_person_bin(person* p, FILE* out) {
     fwrite(&(p->num_drivers), sizeof(int), 1, out);
 
 
-    driver* drivers = get_driver(p);
+    solid_driver* drivers = get_driver(p);
 
     for (int i = 0; i < p->num_drivers; i++) {
         write_str_bin(drivers[i].type, out);
@@ -297,9 +294,9 @@ int read_bin(person* p, FILE* in) {
         return 0;
 
     int count = p->num_drivers;
-    p->disks = malloc(count * sizeof(driver));
+    p->disks = malloc(count * sizeof(solid_driver));
     for (int i = 0; i < p->num_drivers; i++) {
-        driver tmp;
+        solid_driver tmp;
         if (!read_str_bin(tmp.type, in))
             return 0;
         if (!read_str_bin(tmp.name, in))

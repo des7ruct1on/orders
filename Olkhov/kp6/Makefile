@@ -3,10 +3,10 @@ CFLAGS = -std=c99 -Wall -Werror
 DEBUG = gdb
 FILEOUT = run/execute.out
 MAIN_SOURCES = execute.c
-GLOBALS_SOURCES = pcspecs.c
+GLOBALS_SOURCES = pc.c
 CONV = convert.c
 CONVOUT = run/conv.out
-GEN = databasegenerator.c
+GEN = db_gen.c
 GENOUT = run/db.out
 
 all:

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pcspecs.h"
+#include "pc.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
@@ -23,12 +23,12 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Некорректное расширение файла!\n");
         exit(2);
     }
-    FILE* in; // файл входящий
-    FILE* out; // файл выходящий
+    FILE* in; // файл input
+    FILE* out; // файл output
     char line[MAX_SIZE];    
     if (!is_binary) {
         in = fopen(argv[1], "r");
-        out = fopen(argv[2], "wb");  // открываем текстовый
+        out = fopen(argv[2], "wb");  // открываем .txt
 
         if (!in || !out) {
             printf("Не получается открыть файл!\n");
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             write_person_bin(p, out);
             destructor_person(p);
         }
-    } else { // входящий файл - бинарный
+    } else { // открываем .bin
         in = fopen(argv[1], "rb");
         out = fopen(argv[2], "w");  
 
@@ -56,7 +56,6 @@ int main(int argc, char *argv[]) {
                 destructor_person(p);
                 break;
             }
-            //print_person(p);
             write_person_txt(p, out);
             destructor_person(p);
         }

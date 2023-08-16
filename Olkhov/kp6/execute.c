@@ -2,75 +2,58 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "pcspecs.h"
+#include "pc.h"
 
 
 void print_menu() {
-    printf("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
     printf("|  exit  | выход                                                                                      |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
     printf("|  info  | информация о конкретном пассажире (info [Фамилия] [Инициалы])                              |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
-    printf("|        | добавление пассажира(add [Фамилия] [Имя] [Процессор(через '-')] [Видеокарта(через '-')]    |\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
+    printf("|        | добавление пользователя(add [Фамилия] [Имя] [Процессор(через '-')] [Видеокарта(через '-')] |\n");
     printf("|   add  | [Количество ОЗУ] [Операционная система] [Количество накопителей]                           |\n");
     printf("|        | затем пишете тройки значений [Тип накопителя(SSD/HDD)] [Бренд] [Объем]                     |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
-    printf("|  task  | найти пользователей с однотипными компьютерами                                             |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
+    printf("|  task  | Вывести информацию о всех рабочих станцияъ                                                 |\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
     printf("|  table | распечатать таблицу                                                                        |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
     printf("| remove | удаление пользователя(remove [Фамилия] [Инициалы])                                         |\n");
-    printf("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n");
+    printf("|-----------------------------------------------------------------------------------------------------|\n");
 }
 
-// будем считать компьютеры однотипными, если у них совпадают процессор и видеокарта
-bool almost_same_pc(person* one, person* two) {
-    return !strcmp(get_cpu(one), get_cpu(two)) && !strcmp(get_gpu(one), get_gpu(two));
-}
-
-// функция проверки на нахождение пользователя в массиве найденных
-bool check_found(person** data, person* pers) {
-    if (data == NULL) {
-        return false;
+void print_all_specs(person* p, int num) {
+    char* surname = get_surname(p);
+    char* name = get_name(p);
+    char* cpu = get_cpu(p);
+    char* gpu = get_gpu(p);
+    int ram = get_ram(p);
+    char* os = get_os(p);
+    int num_drivers = get_amount_disks(p);
+    solid_driver* disks = get_driver(p);
+    printf("|=============================|\n");
+    printf("| Номер компьютера: %d\n", num);
+    printf("| Владелец: %s %s\n", surname, name);
+    printf("| Характеристики компьютера\n");
+    printf("| Процессор: %s\n", cpu);
+    printf("| Видеокарта: %s\n", gpu);
+    printf("| Объем ОЗУ: %d\n", ram);
+    printf("| Операционная система: %s\n", os);
+    printf("| Количество хранилищ: %d\n", num_drivers);
+    for (int i = 0; i < num_drivers; i++) {
+        printf("| Диск %d: %s %s %d\n", (i + 1), disks[i].type, disks[i].name, disks[i].amount);
     }
-    for (int i = 0; i < TABLE_SIZE; i++) {
-        if (data[i] != NULL && strcmp(data[i]->surname, pers->surname) == 0) { // Исправлено: data[i] != NULL
-            return true;
-        }
-    }
-    return false;
+    printf("|=============================|\n");
 }
-
 
 void task(hash_table* table) {
-    person* found[TABLE_SIZE] = {NULL}; // массив найденных пользователей
-    int index = 0;
+    int count = 0;
     for(int i = 0; i < TABLE_SIZE; i++) {
         if (table->elements[i].data != NULL) {
-            person* tmp1 = table->elements[i].data; // берем первого
-            for (int j = 0; j < TABLE_SIZE; j++) {
-                if (table->elements[i].data != NULL) {
-                    person* tmp2 = table->elements[j].data; // берем второго
-                    char* surname1 = get_surname(tmp1);
-                    char* surname2 = get_surname(tmp2);
-                    if (!strcmp(surname1, surname2) && strcmp(table->elements[j].key, table->elements[i].key)) { // сравниваем фамилии
-                        if (almost_same_pc(tmp1, tmp2) && !check_found(found, tmp2)) { // проверяем компьютеры и на уникальность проверки
-                            print_person(tmp1);
-                            print_person(tmp2);
-                            found[index] = tmp1; // добавляем найденных
-                            index++;
-                            found[index] = tmp2; // добавляем найденных
-                            index++;
-                        } else {
-                            continue;
-                        }
-                    } else {
-                        continue;
-                    }
-                } else {
-                    continue;
-                }
-            }
+            person* tmp = table->elements[i].data; // берем первого
+            print_all_specs(tmp, count);
+            count++;
         } else {
             continue;
         }

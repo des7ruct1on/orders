@@ -4,16 +4,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+
+// константы
 #define STR_SIZE 24
 #define TABLE_SIZE 100
 #define MAX_SIZE 256
 
 // структура накопителя
-typedef struct driver {
+typedef struct solid_driver {
     char name[STR_SIZE];
     char type[2];
     int amount;
-} driver;
+} solid_driver;
 
 // структура пользователя
 typedef struct person {
@@ -24,7 +26,7 @@ typedef struct person {
     int ram;
     char os[STR_SIZE];
     int num_drivers;
-    driver* disks;
+    solid_driver* disks;
 } person;
 
 // структура элемента хеш-таблицы и самой таблицы
@@ -46,7 +48,7 @@ char* get_gpu(person* p);
 int get_ram(person* p);
 char* get_os(person* p);
 int get_amount_disks(person* p);
-driver* get_driver(person* p);
+solid_driver* get_driver(person* p);
 
 // вспомогательные функции и функции взаимодействия с таблицей
 void print_person(person* p);
