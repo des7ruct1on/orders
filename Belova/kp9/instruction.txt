@@ -1,0 +1,5 @@
+Запуск программы осуществляется так же, как и в кп7:
+make
+make run FILE=input.txt
+проверка на утечку памяти проходит так же, как в кп7
+make memcheck FILE=input.txt

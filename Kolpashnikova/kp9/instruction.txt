@@ -1,0 +1,5 @@
+Запуск программы осуществляется:
+make
+make run FILE=input.txt
+проверка на утечку памяти проходит так:
+make memcheck FILE=input.txt

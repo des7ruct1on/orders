@@ -1,0 +1,372 @@
+(base) ivan@MacBook-Pro-Ivan-3 desktop % cd desktop
+cd: no such file or directory: desktop
+(base) ivan@MacBook-Pro-Ivan-3 desktop % ls
+DSyandex				python projects
+LAAG					untitled folder
+Photoshop projects			Дерево выражений
+faq8					Задачи с экза
+kp7.pages				курсы
+labs2sem				методички
+labs2sem copy				фотки и скрины
+(base) ivan@MacBook-Pro-Ivan-3 desktop % touch file1.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % touch file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % echo lol >file1.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % cat file1.txt
+lol
+(base) ivan@MacBook-Pro-Ivan-3 desktop % echo mew > file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % cmp file1.txt file2.txt
+file1.txt file2.txt differ: char 1, line 1
+(base) ivan@MacBook-Pro-Ivan-3 desktop % diff file1.txt file2.txt
+1c1
+< lol
+---
+> mew
+(base) ivan@MacBook-Pro-Ivan-3 desktop % cmp -b file1.txt file2.txt
+file1.txt file2.txt differ: char 1, line 1 is 154 l 155 m
+(base) ivan@MacBook-Pro-Ivan-3 desktop % history | tail -10
+ 1028  cd desktop
+ 1029  ls
+ 1030  touch file1.txt
+ 1031  touch file2.txt
+ 1032  echo lol >file1.txt
+ 1033  cat file1.txt
+ 1034  echo mew > file2.txt
+ 1035  cmp file1.txt file2.txt
+ 1036  diff file1.txt file2.txt
+ 1037  cmp -b file1.txt file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % history | tail -2 
+ 1037  cmp -b file1.txt file2.txt
+ 1038  history | tail -10
+(base) ivan@MacBook-Pro-Ivan-3 desktop % history | head -2
+ 1024  cd desktop
+ 1025  ls
+(base) ivan@MacBook-Pro-Ivan-3 desktop % join file1.txt file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % ls -la
+total 6008
+drwx------@ 20 ivan  staff      640 May 29 22:58 .
+drwxr-x---+ 51 ivan  staff     1632 May 28 17:18 ..
+-rw-r--r--@  1 ivan  staff    18436 May 29 22:58 .DS_Store
+-rw-r--r--   1 ivan  staff        0 Jul 27  2022 .localized
+drwxr-xr-x   3 ivan  staff       96 Apr 29 00:37 DSyandex
+drwxr-xr-x   8 ivan  staff      256 May 26 00:22 LAAG
+drwxr-xr-x   6 ivan  staff      192 Mar 30 20:07 Photoshop projects
+drwxr-xr-x   6 ivan  staff      192 Mar 30 21:28 faq8
+-rw-r--r--   1 ivan  staff        4 May 29 22:58 file1.txt
+-rw-r--r--   1 ivan  staff        4 May 29 22:58 file2.txt
+-rwx------@  1 ivan  staff  3046728 May 11 12:13 kp7.pages
+drwxr-xr-x@ 13 ivan  staff      416 May 24 02:22 labs2sem
+drwxr-xr-x@ 14 ivan  staff      448 May 24 02:09 labs2sem copy
+drwxr-xr-x   5 ivan  staff      160 May 24 01:48 python projects
+drwxr-xr-x   4 ivan  staff      128 May 24 01:56 untitled folder
+drwxr-xr-x@  5 ivan  staff      160 May  7 18:05 Дерево выражений
+drwxr-xr-x  27 ivan  staff      864 Mar 15 14:53 Задачи с экза
+drwxr-xr-x@  7 ivan  staff      224 May  9 01:42 курсы
+drwxr-xr-x@  4 ivan  staff      128 Feb  5 12:45 методички
+drwxr-xr-x   8 ivan  staff      256 May  7 14:24 фотки и скрины
+(base) ivan@MacBook-Pro-Ivan-3 desktop % cat file1.txt
+lol
+(base) ivan@MacBook-Pro-Ivan-3 desktop % nano file1.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % ls | find f* | grep 2
+faq8/.git/objects/ac/f347b41935000a0f00d598e33d25c301115915
+faq8/.git/objects/06/25ce4f7f62694c45789e261d39cf8c1ac2c37a
+faq8/.git/objects/c5/8a45864db9465a9c699d0b502ed45bb5cbdefb
+faq8/src/.git/objects/61/8d755b6118e9f8e5205da10f9d9454a42392e7
+faq8/src/.git/objects/59/a1456fe7ae739cb54580dd0539366d5f87269a
+faq8/src/.git/objects/92
+faq8/src/.git/objects/92/fe2bc12172df02fc481b36e141653c1319a589
+faq8/src/.git/objects/3e/6c06977ef41e12893ff2c4225c212a9c37ea5a
+faq8/src/.git/objects/3b/b273acbf834e3c96dc98b3ee3b0187cad7c4c3
+faq8/src/.git/objects/6f/7ebc50d0e98b29558405418d4312490ffdce11
+faq8/src/.git/objects/6f/dfc73e8c0b9742a63a97f5dbae80735dc85595
+faq8/src/.git/objects/6f/1644f9ee792ae1e803b26732cca0f9b3c32191
+faq8/src/.git/objects/03/e5621b9eb43a951a79e2cb366d896137d36983
+faq8/src/.git/objects/03/2dc24f358a2c80770903d53b8304923594b336
+faq8/src/.git/objects/9b/c1268df6424c894ccb75ea546c34a862174948
+faq8/src/.git/objects/9e/671a0e11656c726d02fd633584b25d6d7efbeb
+faq8/src/.git/objects/6a/79e10a43076f40b6bbb8ae02bb361f0aa26725
+faq8/src/.git/objects/35/f4e4aec6bb197820cda9810862ccdfefafdfe6
+faq8/src/.git/objects/35/8169b914590b630087e8107c38a33014ec0bd2
+faq8/src/.git/objects/35/41b270042a4e3a80dcfd1a52caa241552dbeef
+faq8/src/.git/objects/69/722918616d66570bdbd05594286a8ed1c880cf
+faq8/src/.git/objects/3c/3e377f17603d15a2207484eb222d93213dc8d6
+faq8/src/.git/objects/56/2c82ae61ea6dec1b78f5c8d3b364e4d9e7487b
+faq8/src/.git/objects/3d/cce3b9f63c15de07c1d50719b0e7e183270a79
+faq8/src/.git/objects/58/31f6dd965b424601082962536dd201ccbd900a
+faq8/src/.git/objects/0b/5095401e45dd0abd257a86d442c9077c1b9279
+faq8/src/.git/objects/0b/c17b896c78620b7f166a1190dbd4ca121cc81e
+faq8/src/.git/objects/94/1ec2f6d4ee205e3fc59309c29b0aa75c0d0c37
+faq8/src/.git/objects/60/c046c2426a83ba7b94751941dcf367ac203648
+faq8/src/.git/objects/34/2c2b188365523db44ab35329a3b254729292e6
+faq8/src/.git/objects/34/c8209faa6909d60d9bd6e8c519e74d446daf8b
+faq8/src/.git/objects/5a/f8b984d22255f7202b424cd5dda072bd7c96f5
+faq8/src/.git/objects/5a/21896b78bcaf6b0c2d85a074b4b54fc1499fa9
+faq8/src/.git/objects/5f/aed1988874909251e928cb298f27a3ac35736a
+faq8/src/.git/objects/5f/72524071858a80d74fed6c07e6b5cd527b0e19
+faq8/src/.git/objects/33/8daf2d4af69dd619e11e254d0c11e38b298e4e
+faq8/src/.git/objects/9d/5325936451f9d48bc90a43611c6931073cfb44
+faq8/src/.git/objects/9c/2c88a50c066efd6a64a7ec85969a13eb8252f7
+faq8/src/.git/objects/a3/1d016d74835edf4925961cb4bff44918fd393b
+faq8/src/.git/objects/b5/d620f8b31aaed08dc511bcfd7109584fd58d42
+faq8/src/.git/objects/b5/566dd63688807bd62b35cb606b1ee6a2cfe20e
+faq8/src/.git/objects/b5/8d4d7a4c10497c0c5233ea1d2858c98a1e36db
+faq8/src/.git/objects/b2
+faq8/src/.git/objects/b2/baaa6fee0a8e5673013f1536caaf99c7339f29
+faq8/src/.git/objects/b2/932e2087ee4b8c96e033e61fc3e20f40b952fe
+faq8/src/.git/objects/ad/5c2b2049b7acb2305956b7fc6d565464a8c6ff
+faq8/src/.git/objects/bb/1592841f709663cd920fc33f938f257aaa23a4
+faq8/src/.git/objects/d7/b6bb82ec84719302867b80fc6778382dfeeed0
+faq8/src/.git/objects/be/0dc1e79470a7ce8c6182b88cbe90bebb516efb
+faq8/src/.git/objects/be/23e20baf674d778ba7db4dc91bcb44f48d7c8b
+faq8/src/.git/objects/b3/2d0918f88e87979a7b8ab21d5fe8efdbaf1a28
+faq8/src/.git/objects/b3/b96bbc0e42684a450a5be0d4b47f2ec46ec570
+faq8/src/.git/objects/a5/e6f380ae0dcd3a9a6072b8b259fc875d82716f
+faq8/src/.git/objects/bd/bda1066ad12105d639c580602c810b5d8112de
+faq8/src/.git/objects/bc/be9923a4b017f864618bad92c4e1dc7a766ecd
+faq8/src/.git/objects/ab/f47d7475431709331978729b6978c163eae9ff
+faq8/src/.git/objects/f4/8921ca41b8b82f1d4f885d7b9c874da9333bfc
+faq8/src/.git/objects/f3/baa18209fd3f74945d53958cffc47482374054
+faq8/src/.git/objects/f3/839a4495f2adabb50b6ba713e5dce5015135be
+faq8/src/.git/objects/c0/e43ad52353702b78ac46262068ce1d051820f4
+faq8/src/.git/objects/ee/2b61c33c9438a2f5a2937f39bd72335f0921d6
+faq8/src/.git/objects/c9/02f926713e10840181513f121b52a66522054b
+faq8/src/.git/objects/fc/6e2a85766477e3cd3657765eb75fa4a9bcec27
+faq8/src/.git/objects/f2
+faq8/src/.git/objects/f2/b0d27535a5dcef2f572161fb088dad3a9e6aee
+faq8/src/.git/objects/e3/e1bbff5fbbc7dbbf2a68b58ba362f04155754a
+faq8/src/.git/objects/cf/9fddc5feffba61a8a71e6711a1ba09163b2ac6
+faq8/src/.git/objects/ca/15a0d394382980a8c4a235c0f40a88ae77abd5
+faq8/src/.git/objects/ca/c76068b862b30994a068303be1a1d1c8c6b7d8
+faq8/src/.git/objects/e4/6c59d5750003483a9cc234f5cefd24719bd1ab
+faq8/src/.git/objects/fe/bccae06a88a734e34c7bb721e2a4894d7b5db0
+faq8/src/.git/objects/fb/7ec8acc65a5a19aa61f594c8125dd271fd2b6f
+faq8/src/.git/objects/fb/e54545948a038c0faed36d322274940ae6a7e2
+faq8/src/.git/objects/c1/64b043ba224d6afaa8b9897cf7cbfd886790d6
+faq8/src/.git/objects/c1/fe6ac08b24a63b9ae253bcf270e568ba948298
+faq8/src/.git/objects/c6/706e396798112a6e3ae356d32748abd5e68c1d
+faq8/src/.git/objects/c6/1a18b1212102a19a78ac694ed760f9894b0089
+faq8/src/.git/objects/ec/9f595c02ca857c81f975ba8d99e0d4c10b4271
+faq8/src/.git/objects/ec/0780e86843a3d28d9d92299fa107b078c536b5
+faq8/src/.git/objects/4e/616380ab025ddd1dad98d96fcaa408cd7efae1
+faq8/src/.git/objects/4e/661ca10234e9a36758d2a388caa63a8a41ba82
+faq8/src/.git/objects/18/6385160134af034f72ece21045b31840f89e6f
+faq8/src/.git/objects/11/509a96d0fbecfb7604045faa950abc2ff94a31
+faq8/src/.git/objects/11/493633ca4b6215a243ca432f225e4f4df339b6
+faq8/src/.git/objects/11/7d29aa2f815cc2c9994f7957b09202f0ce4d78
+faq8/src/.git/objects/7d/cf120e7777b180e5a73b742b734e62e29133cc
+faq8/src/.git/objects/7c/1c30c0c4c1ad4a96455bc5225103464d8c2b4b
+faq8/src/.git/objects/42
+faq8/src/.git/objects/42/bf561194cb7c0394fabbe4277176cd34208854
+faq8/src/.git/objects/73/13a678d324987ed848e3e82c6c3ea0bd03342d
+faq8/src/.git/objects/73/b8535f56f9d354c854d7db97744c9317f41a2e
+faq8/src/.git/objects/87/b5a70457f5058eb75caad68c98d586a62c8d8e
+faq8/src/.git/objects/87/78c8594e7d15bc28633702da63e25ea5ef0081
+faq8/src/.git/objects/87/9daa6536b07e51d8fd770d9fae580e15d15248
+faq8/src/.git/objects/74/39e2afb7be5d06fa78d5359e0a511228eea37c
+faq8/src/.git/objects/1a/962f400e6cbea760ce854529dea574241546b9
+faq8/src/.git/objects/28
+faq8/src/.git/objects/28/bd56460f866d336ba039abf19d8113c0760a60
+faq8/src/.git/objects/28/fdfb350f226756346146b96243a829400fdc89
+faq8/src/.git/objects/17/f6befc3341d936eeaae0b392c65fc8387c5086
+faq8/src/.git/objects/17/54bf8d662867d700f44f308d771c1c1d2cd608
+faq8/src/.git/objects/7b/e22c9fe38dd10d5875a8f085e8a208be019aca
+faq8/src/.git/objects/8f/4c281c8a2ed06218bb253f52706bb07f04ad9a
+faq8/src/.git/objects/8f/d8f7de472bf5367854f1d75b62d22ec5bb76df
+faq8/src/.git/objects/7e/171ec2e30f9b8c901e201bb0255d3c4d9118c7
+faq8/src/.git/objects/19/2eb9ce43389039996bc2e9344c5bb14b730d72
+faq8/src/.git/objects/19/656457108f594a0596032ed2b98ce053963136
+faq8/src/.git/objects/4c/28cc3da9eae5979e76bea609ae1db3ea65fa28
+faq8/src/.git/objects/4c/bd5e9c53b2fcc6c3b36d14029c4d43de327922
+faq8/src/.git/objects/26
+faq8/src/.git/objects/26/f4abc30d6603bff8c03fac0259b71ef9ca68fb
+faq8/src/.git/objects/21
+faq8/src/.git/objects/21/6f5ab7f4c8e64489403444257fb27e0d527894
+faq8/src/.git/objects/21/ffa31e24bee14136a9f26001661fcfde89f1a2
+faq8/src/.git/objects/4d/a209a6afb92d7c87df475f7426ff123d5e336e
+faq8/src/.git/objects/75/2e38604d0df9cb188e3a7759a8abad2bb23bf7
+faq8/src/.git/objects/75/042c2d0f0ad9157f32581cf75cd01bb59974b7
+faq8/src/.git/objects/81/2c6242c0b4b7df63bec2f835953e33e0264c66
+faq8/src/.git/objects/81/46f3e3e345855ad93f0fdf8fd45c5eadcef242
+faq8/src/.git/objects/72
+faq8/src/.git/objects/72/9b68c9a3342426b93eb3ea8f302658e0de3204
+faq8/src/.git/objects/44/f2d854ab76152f40e71f3bf3ae62f1dae0970c
+faq8/src/.git/objects/2a
+faq8/src/.git/objects/2a/b8e696bac86a72047b675a9f7a2cba1cc20bd8
+faq8/src/.git/objects/2a/33fb41d74bdf388b8e3af6f0a5714bef35b765
+faq8/src/.git/objects/2f
+faq8/src/.git/objects/2f/1a352524c6b40eff096a8a3960c81af6be4070
+faq8/src/.git/objects/2f/87a581192bc11f1bbfd488dd8f68d7cb2b1e9f
+faq8/src/.git/objects/2f/c94b977dc625ed563ad79878bfdbf4497954fc
+faq8/src/.git/objects/43/093c6800fe8735abd37624cf645e70fc353570
+faq8/src/.git/objects/88/54aa81a853c2782374f5dfde3cd218cfb3210e
+faq8/src/.git/objects/88/303efa4cc8bdbf7905883fe5e0334a52800e21
+faq8/src/.git/objects/07/71a0f7742a4e29103f9d2677a624a2b440c347
+faq8/src/.git/objects/38/4f2d5bdf61b9729dcf2f4328b87f832e6599fb
+faq8/src/.git/objects/00/5355bd487f82f5766ac0597178ceabd9ae9bf2
+faq8/src/.git/objects/00/f7c578177c7e11014f8b2ccf57945bd811e79c
+faq8/src/.git/objects/6e/b23681392de0e836f93602000400c521f8a435
+faq8/src/.git/objects/9a/94999eb37240ee7c851bee30fef013f7d6133b
+faq8/src/.git/objects/5c/010928a24c41731b06de1abb478aefb75226c5
+faq8/src/.git/objects/09/3f0826bc33906e496f1e858c03db3bb5765647
+faq8/src/.git/objects/31/e254a2766ae4c909cd5d7b12e89e724a831e64
+faq8/src/.git/objects/31/433d755a7daeedf64f9bd0a156487dd5326ebf
+faq8/src/.git/objects/62
+faq8/src/.git/objects/62/a911561456bf12f19c55b48aededa59278c514
+faq8/src/.git/objects/62/d3a61871039b20b0bfc6c7474d00a5639f3830
+faq8/src/.git/objects/54/a1ac2776950f6e29d3440dffb69a32073d1970
+faq8/src/.git/objects/30/3bc79996992d1d4999d8751105d367526b5c61
+faq8/src/.git/objects/30/bc8544131b4812df01bb038dfeeb9a0ba2b4bc
+faq8/src/.git/objects/5e/942342273aff17caf4cb32b3d2367433e5ed36
+faq8/src/.git/objects/5e/2950bc2a7e07b6544077eace8c6280a9d1a518
+faq8/src/.git/objects/5b/57a5b62d3c9d2cce083e3de04f8d4ba318a061
+faq8/src/.git/objects/37/58113404a26a885be73aba316ea5cb7569994b
+faq8/src/.git/objects/6d/0ed22287729f005ed378fa1c654782914b4d36
+faq8/src/.git/objects/01/7f2e78e8dec5f58a07b9ee0a8b69d46a6a1bc0
+faq8/src/.git/objects/01/513f89ea51641b1ef995c7437db2573c5ad54f
+faq8/src/.git/objects/06/f20ab3320460c79eeffe9e2a53799071128e83
+faq8/src/.git/objects/6c/2b6893d593201d7c94e52687f78b2ef28b357e
+faq8/src/.git/objects/39/4293ad28562461fdcc4143e4d663d4416ceae6
+faq8/src/.git/objects/97/c0f56a08975d27f70adae42f078f9d2db40e47
+faq8/src/.git/objects/97/0e6dd9db6ab3185af3dc8bab68e3ce84c83c2c
+faq8/src/.git/objects/63/5529d1b2de03a857dea48727672c946bd272ec
+faq8/src/.git/objects/63/3f58047719a8aaed640aadafc841ea2dbbd5f9
+faq8/src/.git/objects/0a/8f528d2442027f571d197bcf46178cc3c9382c
+faq8/src/.git/objects/64/a23df8a3d489fad18dc96e16ed0143a4f6a690
+faq8/src/.git/objects/64/8bf5648da284efc83241efa4d850f638a032bc
+faq8/src/.git/objects/bf/13bc5b3e14f6492cf16a908dd35c0100ec43d8
+faq8/src/.git/objects/d4/1dd3d3e8144276f3ada98b1dbfeaf2254e920f
+faq8/src/.git/objects/d4/45cbf962215f332d68de96ad1fbd3e4c12a546
+faq8/src/.git/objects/a0/79828b2a076f1de13c58fe23a0c18dea919d0c
+faq8/src/.git/objects/b1/bb363dee804b17ee184d0d329a4910bdbab0b3
+faq8/src/.git/objects/b1/d9250ea0a7f44ee095d560562fcd991e01917a
+faq8/src/.git/objects/b1/b512ddbcdc3faff1c0ca1bff15454bc68b457e
+faq8/src/.git/objects/dd/a6f01f7d68ce3311211df7fca8aedf1343cc18
+faq8/src/.git/objects/a9/0e1fa860698b59d84a226c57aad9e3cce9c08b
+faq8/src/.git/objects/d5/94ecd479e8fc30c0d501e90212d7e07e29eb58
+faq8/src/.git/objects/d2
+faq8/src/.git/objects/d2/4cbb6756461d1a5bb9f0b961387ee633fdd026
+faq8/src/.git/objects/aa/2a4d5544048f3a9b88f2321e9a92f6e8f033d9
+faq8/src/.git/objects/af/0ef5e53dd5d89d9c275d7207055703dab6cceb
+faq8/src/.git/objects/db/0cf6983794ca2437a6489ebf6431ce3ed9788c
+faq8/src/.git/objects/b0/7de9078201ccbd8131f862b3a77e027cd522fe
+faq8/src/.git/objects/b9/7f64964b4a46831d3204860a2db9dfd174000a
+faq8/src/.git/objects/a1/0218a1fc713e339d91ebcb98e53163d249d959
+faq8/src/.git/objects/ef/659a71cbbd2808a05c90238d12bf33d4d056eb
+faq8/src/.git/objects/ef/3727349819e688f4a730cb5bfdd53211b77ec9
+faq8/src/.git/objects/ef/20c628b377c8ca55432af5485f8493b31445cf
+faq8/src/.git/objects/ef/ef816341a9a829a02aead0548fc747e1e8571f
+faq8/src/.git/objects/ea/2db3b27b877ce445764617aeab58e09422b2ca
+faq8/src/.git/objects/ea/9b469e5497bb526e14561acbb04db41d754a6f
+faq8/src/.git/objects/ea/7f31a5f2b536c6290c00e48220a516dc704194
+faq8/src/.git/objects/cd/320bc7df25258d97b7f358286ceea3276b697a
+faq8/src/.git/objects/cd/c9feb36a35273c295f24cf311268257fd843d0
+faq8/src/.git/objects/cc/bd578bc80bc400335745fb58decf2f481710a1
+faq8/src/.git/objects/e6/2b1fb0665499f63d67f9efdff185ae51127b89
+faq8/src/.git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+faq8/src/.git/objects/f9/30c98a7b2badff118acacf35d7eaae93ae349e
+faq8/src/.git/objects/f0/877b7c074338bc59bdbcef4cae2800ca2924f2
+faq8/src/.git/objects/e8/fddac58b34df63b8f490ac58c613b8e2fb3208
+faq8/src/.git/objects/ff/91bb1ee0643ec391fe96681181ba4f7f02c48b
+faq8/src/.git/objects/ff/67e6f7af11ec9d2d4049b9a4c89c39c518dbc4
+faq8/src/.git/objects/c5/905a02da10b7df15a92e673afe792fbf22b065
+faq8/src/.git/objects/c2
+faq8/src/.git/objects/c2/6513e3f0e2307ff1e9fdcb37e5dc0d7693042c
+faq8/src/.git/objects/c2/0597c043e11220646433c1d81d0afebd8e76d7
+faq8/src/.git/objects/c2/ccbc7703b6ac7f570856c7d9c07ca013f843fa
+faq8/src/.git/objects/e9/104bfc283daf1a984f0251e85ce0f25463d652
+faq8/src/.git/objects/e9/2004083edd1988173b43efd2d068e93e3acee2
+faq8/src/.git/objects/e7/31cb12fbc3e0d883d9f53c31cb08550610ff19
+faq8/src/.git/objects/cb/058ce4137e79810484255fa1520f44ed6ef80c
+faq8/src/.git/objects/f8/c07c44083bd44862435456a0992075799679a1
+faq8/src/.git/objects/f8/1ab4b64a6d7e1788174d2c0f2e345a92379f62
+faq8/src/.git/objects/e0/af633bf986a27bc1453f88f38d591ce1c603e4
+faq8/src/.git/objects/e0/6c2edda75c38b4b1b22a4fa9e8e5b6c840ca22
+faq8/src/.git/objects/46/c057c085c0a0613c0eaa77f97520b89a271931
+faq8/src/.git/objects/2c
+faq8/src/.git/objects/2c/d641d28ed7efb6906527a488c18476a9044a8c
+faq8/src/.git/objects/2c/0803919f3603a97aecd0d0ece791c2f740fa7c
+faq8/src/.git/objects/79/b0851872b865c214d81e0d5cc910d473aae401
+faq8/src/.git/objects/83/060fbacc1f9a2e1ed6a29cf1b3df4ebd847446
+faq8/src/.git/objects/1b/20bb8d60befe42920bb931b44e1bed778be6e0
+faq8/src/.git/objects/1b/8fa5901d5d61adf99a98f750324e84298fe38c
+faq8/src/.git/objects/48/633542a4fc735de042a06c39c2d3bc0428d45d
+faq8/src/.git/objects/48/467950c2afdf72823d968b7a1f612d124fd565
+faq8/src/.git/objects/84/ab537492957080d28b1cdc9d75b3eceb046c42
+faq8/src/.git/objects/84/c8045e410cdbfa26d916ed073439d2299327d9
+faq8/src/.git/objects/4a/bc701d36c6991e4d48e6eda8b2acea391624ed
+faq8/src/.git/objects/4a/398048dc7e4e99aa680b38a1da82f0767c750d
+faq8/src/.git/objects/24
+faq8/src/.git/objects/24/28bc656fcb9f8489cd82803a405e61bab47669
+faq8/src/.git/objects/23
+faq8/src/.git/objects/23/b774147189be061ce24a2a275ff9a5ae6a5435
+faq8/src/.git/objects/23/4b371224557e83f34acb6c12a4423dd88072dc
+faq8/src/.git/objects/8d/3fbba9bdeb527f37e58437229b5458066b83e8
+faq8/src/.git/objects/15/26d71cbf1a79975c00b7d60723847bba93f860
+faq8/src/.git/objects/85/93782c7b08d9b2578370b63fd793741128197c
+faq8/src/.git/objects/85/349cf5244ac5a43799b7da517cb0ee6bd6e921
+faq8/src/.git/objects/1d/8dcc3dd05a32bcdff71919f9bc92c40e0beac2
+faq8/src/.git/objects/76/ddcb6bb0f3a40c03f619fa2da5a2296c4eb52c
+faq8/src/.git/objects/1c/bedc96b1347fa41a9d0dd7e16c52bc813007f8
+faq8/src/.git/objects/1c/eb60dfe72ac25f40a60d6f3e7cffc7015e6274
+faq8/src/.git/objects/1c/e7a3036d4fca1ad80b1a99313720a847b158e9
+faq8/src/.git/objects/82
+faq8/src/.git/objects/82/a2bdb644753eec7a86997fcecacb4395b5e857
+faq8/src/.git/objects/49/f6152c7a29c04ac196a546fe58252bc3ff1768
+faq8/src/.git/objects/49/31cedb4d5774fbbd3d7935a61a245805056a6f
+faq8/src/.git/objects/40/2ee55afbdc9a80777c10854b66093fb3e76734
+faq8/src/.git/objects/40/aa6f14d732371ab381946f6e7fcc23edee5b1e
+faq8/src/.git/objects/2b
+faq8/src/.git/objects/2b/e100373dbdd547df47cb506d662631e78f9bad
+faq8/src/.git/objects/47/99dbe3891e79cf8dc1bfcdfe325446b91882a2
+faq8/src/.git/objects/78/4d4b2146d423664cabdd94d69f04631183e339
+faq8/src/.git/objects/78/2deef74c654662cfed917ef9b0df79ca02f225
+faq8/src/.git/objects/8b/3e70e58194e3a2a363db99bbd1b2d0cd972d58
+faq8/src/.git/objects/8b/984820834d4c10968a3178f92a8ff355ad566d
+faq8/src/.git/objects/8b/acd42483a90caeb4e292d165a8c61476a0db9e
+faq8/src/.git/objects/8e/b678c7fc78d68ca4030332c34e52a966e3fc2a
+faq8/src/.git/objects/22
+faq8/src/.git/objects/22/dacf010974d25f35dd7ba6cf443395f36463d8
+faq8/src/.git/objects/22/354b01e0a011cea4e4a451039ea2783024bd36
+faq8/src/.git/objects/25
+faq8/src/.git/objects/25/90a7e7dc050aab37124c407c8fc50fe326e33c
+faq8/src/.git/objects/25/4fbf93a1333cd720911c6024be3fa17464a8a5
+file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % wc file1.txt
+       1       1       4 file1.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % comm file1.txt file2.txt
+lol
+	mew
+(base) ivan@MacBook-Pro-Ivan-3 desktop % uniq -c file1.txt 
+   1 lol
+(base) ivan@MacBook-Pro-Ivan-3 desktop % uniq -c file1.txt | tr 7 a | tee file
+   1 lol
+(base) ivan@MacBook-Pro-Ivan-3 desktop % uniq -c file1.txt | tr 7 o | tee file
+   1 lol
+(base) ivan@MacBook-Pro-Ivan-3 desktop % uniq -c file1.txt | tr l o | tee file
+   1 ooo
+(base) ivan@MacBook-Pro-Ivan-3 desktop % file -i file1.txt
+file1.txt: regular file
+(base) ivan@MacBook-Pro-Ivan-3 desktop % iconc -f cp1251 -t utf8 file2.txt
+zsh: command not found: iconc
+(base) ivan@MacBook-Pro-Ivan-3 desktop % iconv -f cp1251 -t utf8 file2.txt
+iconv: conversion to utf8 unsupported
+iconv: try 'iconv -l' to get the list of supported encodings
+(base) ivan@MacBook-Pro-Ivan-3 desktop % wc file2.txt
+       1       1       4 file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % gip file1.txt file2.txt
+zsh: command not found: gip
+(base) ivan@MacBook-Pro-Ivan-3 desktop % gzip file1.txt file2.txt
+(base) ivan@MacBook-Pro-Ivan-3 desktop % ls
+DSyandex				labs2sem
+LAAG					labs2sem copy
+Photoshop projects			python projects
+faq8					untitled folder
+file					Дерево выражений
+file1.txt.gz				Задачи с экза
+file1.txty				курсы
+file2.txt.gz				методички
+kp7.pages				фотки и скрины
+(base) ivan@MacBook-Pro-Ivan-3 desktop % sum file2.txt.gz
+32 1 file2.txt.gz
+(base) ivan@MacBook-Pro-Ivan-3 desktop % du file1.txt.gz
+8	file1.txt.gz
+(base) ivan@MacBook-Pro-Ivan-3 desktop % 
