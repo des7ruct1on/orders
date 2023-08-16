@@ -1,0 +1,17 @@
+Propastina YK F 1 2 MAI None
+Taskina AO F 1 2 MAI None
+Potapkina MA F 1 2 MAI None
+Potapkova MS F 1 2 MAI None
+Evstineeva SS F 1 2 MAI None
+Aliev RM M 1 4 MAI None
+Blinova MO F 1 4 MAI None
+Zaytsev DE M 1 4 MAI None
+Lyapin IA M 1 4 MAI None
+Panov EK M 1 4 MAI None
+Teslya DS M 1 4 MAI None
+Chesnokov VD M 1 4 MAI None
+Usachev SD M 1 4 MAI None
+Miroshnikov DS M 1 9 MAI None
+Petrov MA M 1 2 MAI None
+Karchauli AZ M 1 2 MAI None
+Nikitin OS M 1 2 MAI None

@@ -1,0 +1,2 @@
+запускаешь все так же, как в предыдущих лабах, но
+`make run FILE1=input1.txt FILE2=input2.txt`
