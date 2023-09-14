@@ -44,7 +44,7 @@ void remove_index(Linked_list* list, int k) {
 void print_list(Linked_list* list) {
     Node* current = list->barrier->next; // Пропускаем барьерный элемент
     int count = 0;
-    int size = get_size(&list);
+    int size = get_size(list);
     printf("(");
     while (current != NULL) {
         if (current->data.real == 0) {
@@ -113,4 +113,15 @@ void insert_at(Linked_list* list, int index, Complex data) {
     new_node->next = current->next;
     current->next = new_node;
     list->size++;
+}
+
+void pop_front(Linked_list* list) {
+    if (list->size == 0) {
+        return; // Список пуст, ничего не удаляем
+    }
+
+    Node* temp = list->barrier->next;
+    list->barrier->next = temp->next;
+    free(temp);
+    list->size--;
 }

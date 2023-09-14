@@ -33,5 +33,5 @@ int get_size(Linked_list* list);
 void clear_list(Linked_list* list);
 void pop_back(Linked_list* list);
 void insert_at(Linked_list* list, int index, Complex data);
-
+void pop_front(Linked_list* list);
 #endif

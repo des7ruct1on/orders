@@ -13,10 +13,38 @@ void print_menu() { // функция меню
     printf("|4. |Удалить элемент в конце                                               |\n");
     printf("|5. |Удалить элемент по индексу                                            |\n");
     printf("|6. |Узнать размер списка                                                  |\n");
-    printf("|7. |Очистить список, если в нем есть элемент, равный заданному значению   |\n");
+    printf("|7. |Очистить элементы до и после элемента равному введенному значению     |\n");
     printf("|==========================================================================|\n");
     printf("|Введите номер желаемого действия                                          |\n");
     printf("|==========================================================================|\n");
+}
+
+void task(Linked_list* list, Complex val) {
+    Node* current = list->barrier->next; // Пропускаем барьерный элемент
+    int count_prev = 0;
+    int count_post = 0;
+    bool found = false;
+    while(current != NULL) {
+        if (current->data.im == val.im && current->data.real == val.real) {
+            found = true;
+        }
+        if (!found) {
+            count_prev++;
+        } else {
+            count_post++;
+        }
+        current = current->next;
+    }
+    if (!found) {
+        printf("Такого элемента не существует в списке!\n");
+        return;
+    }
+    for (int i = 0; i < count_prev; i++) {
+        pop_front(list);
+    }
+    for (int i = 0; i < count_post - 1; i++) {
+        pop_back(list);
+    }
 }
 
 int main(int argc, const char *argv[]) {
@@ -25,8 +53,9 @@ int main(int argc, const char *argv[]) {
     int choose = 1;
     int _real; // действ часть
     int _im; // мнимая часть
-    int size = get_size(&list); //размер списка
+    int size; //размер списка
     int index = 1;
+    Complex element; // элемент списка 
     while(choose) {
         print_menu(); 
         scanf("%d", &choose);
@@ -36,21 +65,21 @@ int main(int argc, const char *argv[]) {
                 clear_list(&list);
                 return 0;
             case 1:
-                printList(&list);
+                print_list(&list);
                 break;
             case 2:
-                Complex element; // элемент списка 
                 printf("Введите значение элемента действительной части: ");
                 scanf("%d", &_real);
                 printf("Введите значение элемента мнимой части: ");
                 scanf("%d", &_im);
                 element.real = _real;
                 element.im = _im;
-                append(&list, element);
-                printList(&list);
+                if (_real != 0 && _im != 0) {
+                    append(&list, element);
+                }
+                print_list(&list);
                 break;
             case 3:
-                Complex element; // элемент списка 
                 printf("Введите значение элемента действительной части: ");
                 scanf("%d", &_real);
                 printf("Введите значение элемента мнимой части: ");
@@ -59,13 +88,15 @@ int main(int argc, const char *argv[]) {
                 element.im = _im;
                 printf("Введите индекс: ");
                 scanf("%d", &index);
-                insert_at(&list, index, element);
-                printList(&list);
+                if (_real != 0 && _im != 0) {
+                    insert_at(&list, index, element);
+                }
+                print_list(&list);
                 break;
             case 4:
                 pop_back(&list);
                 printf("Удаление завершено!\n");
-                printList(&list);
+                print_list(&list);
                 break;
             case 5:
                 printf("Введите индекс: ");
@@ -78,7 +109,13 @@ int main(int argc, const char *argv[]) {
                 printf("Размер списка: %d\n", size);
                 break;
             case 7:
-                
+                printf("Введите значение элемента действительной части: ");
+                scanf("%d", &_real);
+                printf("Введите значение элемента мнимой части: ");
+                scanf("%d", &_im);
+                element.real = _real;
+                element.im = _im;
+                task(&list, element);
                 break;
             default:
                 printf("Такого действия не существует\n");
