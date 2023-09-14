@@ -1,8 +1,9 @@
 # Описание
 Запуск программы осуществляется
 >- make
-make run KEY=input1.txt STRINGS=input2.txt
+>- make run KEY=input1.txt STRINGS=input2.txt
+
 проверка на утечку памяти проходит так:
-make memcheck KEY=input1.txt STRINGS=input2.txt
+>- make memcheck KEY=input1.txt STRINGS=input2.txt
 
 файлы с названием k - файлы с ключами, файлы с называнием s - файлы со строками
