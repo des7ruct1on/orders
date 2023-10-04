@@ -14,6 +14,12 @@ void instruction() {
     printf("'quit' - you will exit the program\n\n");
 }
 
+void swap(NodeQ* node1, NodeQ* node2) {
+    int tmp = node1->value;
+    node1->value = node2->value;
+    node2->value = tmp;
+}
+
 void bubble_sort(Queue* q) {
     int swapped;
     NodeQ* ptr1;
@@ -32,9 +38,7 @@ void bubble_sort(Queue* q) {
         while (ptr1->next != lptr) {
             if (ptr1->value > ptr1->next->value) {
                 // Swap the values
-                int temp = ptr1->value;
-                ptr1->value = ptr1->next->value;
-                ptr1->next->value = temp;
+                swap(ptr1,  ptr1->next);
                 swapped = 1;
             }
             ptr1 = ptr1->next;
