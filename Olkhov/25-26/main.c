@@ -20,17 +20,11 @@ void swap(NodeQ* node1, NodeQ* node2) {
     node2->value = tmp;
 }
 
-void bubble_sort(Queue* q) {
+
+void procedure_find_swap(Queue* q) {
     int swapped;
     NodeQ* ptr1;
     NodeQ* lptr = NULL;
-
-    // Check for empty queue
-    if (q->size == 0) {
-        printf("Queue is empty. Nothing to sort.\n");
-        return;
-    }
-
     do {
         swapped = 0;
         ptr1 = q->first;
@@ -45,6 +39,14 @@ void bubble_sort(Queue* q) {
         }
         lptr = ptr1;
     } while (swapped);
+}
+
+void bubble_sort(Queue* q) {
+    if (q->size == 0) {
+        printf("Queue is empty. Nothing to sort.\n");
+        return;
+    }
+    procedure_find_swap(q);
 }
 
 int main(int argc, const char *argv[]) {

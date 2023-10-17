@@ -6,6 +6,26 @@
 #include <stdbool.h>
 #include "vector.h"
 
+void print_matrix_vectors(vector* values, vector* index_col, vector* index_row) {
+    int size_values, size_col, size_rows;
+    size_values = size_vector(values);
+    size_col = size_vector(index_col);
+    size_rows = size_vector(index_row);
+    printf("\nvalues: ");
+    for (int i = 0; i < size_values; i++) {
+        printf("%d ", print_vector(values, i));
+    }
+    printf("\ncolumns: ");
+    for (int i = 0; i < size_col; i++) {
+        printf("%d ", print_vector(index_col, i));
+    }
+    printf("\nrows: ");
+    for (int i = 0; i < size_rows; i++) {
+        printf("%d ", print_vector(index_row, i));
+    }
+    printf("\n");
+}
+
 void print_matrix(vector* values, vector* index_col, vector* index_row, int size_col, int size_row) {
     int count = 0;
     int index_help = 0;
@@ -160,6 +180,7 @@ void multiply_matrixes(vector* row1, vector* col1, vector* val1, vector* row2, v
     printf("\n");
 
     // вывод матрицы
+    print_matrix_vectors(res_val, res_col, res_row);
     printf("Матрица-результат:\n");
     print_matrix(res_val, res_col, res_row, size_col_res, size_row_res);
 
@@ -270,7 +291,8 @@ int main(int argc, const char* argv[]) {
         }
     }
     fclose(input2); //закрываем файл
-
+    print_matrix_vectors(values_matrix, col_index_matrix, row_index_matrix);
+    print_matrix_vectors(values_matrix2, col_index_matrix2, row_index_matrix2);
     printf("Матрица из [%s]\n", argv[1]);
     print_matrix(values_matrix, col_index_matrix, row_index_matrix, size_col1, size_row1);
     printf("\n");
