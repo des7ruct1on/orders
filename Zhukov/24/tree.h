@@ -46,7 +46,6 @@ typedef struct {
 // структура дерева
 typedef struct Tree {
     Symbol value;
-    struct Tree* parent;
     struct Tree* left;
     struct Tree* right;
 } Tree;
@@ -108,6 +107,7 @@ void stack_destroy(stack* s);
 Tree* stack_top_tree(stack* s);
 Symbol stack_top_symbol(stack* s);
 
+// функции списка (можно было реализовать очередь)
 void push_front(node** head, Symbol data);
 void push_back(node** head, Symbol data);
 void delete_back(node* head);
